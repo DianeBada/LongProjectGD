@@ -45,6 +45,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        #region CAleb's stuff:
+
+        anim = GetComponent<Animator>();
+
+        #endregion
+
         //Grab references for rigidbody and animator from object
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -60,6 +66,26 @@ public class PlayerMovement : MonoBehaviour
         }
         horizontalInput = Input.GetAxis("Horizontal");
 
+        #region CAleb's stuff (movement ANIMATIONS):
+
+        if(horizontalInput == 0) //If the player isn't moving
+        {
+            anim.SetBool("isRunning", false);
+
+        } else
+        {
+            anim.SetBool("isRunning", true);
+        }
+
+        #endregion
+
+        #region Caleb's stuff (Death animation):
+        //if (Input.GetKeyDown(KeyCode.Backspace))
+        //{
+        //    anim.SetBool("isDead", true);
+        //}
+        #endregion
+
         //Flip player when moving left-right
         if (horizontalInput > 0.01f)
             transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
@@ -72,7 +98,20 @@ public class PlayerMovement : MonoBehaviour
 
         //Jump
         if (Input.GetKeyDown(KeyCode.Space) && ActionsManager.hasJumping == true)
+        {
             Jump();
+        }
+
+        #region Caleb's stuff (jump TAKE OFF animation):
+        if (isGrounded())
+        {
+            anim.SetBool("isJumping", false);
+        }
+        else
+        {
+            anim.SetBool("isJumping", true);
+        }
+        #endregion
 
         //Adjustable jump height
         if (Input.GetKeyUp(KeyCode.Space) && body.velocity.y > 0)
@@ -109,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        
         if (coyoteCounter <= 0 && !onWall() && jumpCounter <= 0) return; 
         //If coyote counter is 0 or less and not on the wall and don't have any extra jumps don't do anything
 
@@ -126,7 +166,13 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             if (isGrounded())
+            {
                 body.velocity = new Vector2(body.velocity.x, jumpPower);
+
+                #region Caleb's stuff (jump TAKE OFF animation):
+                anim.SetTrigger("jump_takeOff");
+                #endregion
+            }
             else
             {
                 //If not on the ground and coyote counter bigger than 0 do a normal jump
