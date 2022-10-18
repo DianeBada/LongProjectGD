@@ -42,9 +42,9 @@ public class PurchaseActions : MonoBehaviour
 
 
         currency.text = "Currency:  " + ActionsManager.moneyCount.ToString();
-        walktext.text = "Run - " + walkingCost.ToString() + "curr";
+        walktext.text = "Run - " + walkingCost.ToString();
         dashtext.text = "Dash - " + dashingCost.ToString();
-        jumptext.text = "Jump - "+ jumpingCost.ToString();
+        jumptext.text = "Triiple Jump - "+ jumpingCost.ToString();
         climbtext.text = "Climb - "+ climbingCost.ToString();
         shoottext.text = "Shoot - " + shootingCost.ToString();
 
@@ -146,6 +146,7 @@ public class PurchaseActions : MonoBehaviour
                 ActionsManager.moneyCount -= jumpingCost;
                 ActionsManager.hasJumping = true;
                 jumping = true;
+                PlayerMovement.extraJumps = 2;
                 ActionsManager.actionCounter++;
                 hasBoughtJump = true;
 

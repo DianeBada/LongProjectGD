@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteCounter; //How much time passed since the player ran off the edge
 
     [Header("Multiple Jumps")]
-    [SerializeField] private int extraJumps;
+    [SerializeField] public static int extraJumps;
     private int jumpCounter;
 
     [Header("Wall Jumping")]
@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         //anim.SetBool("grounded", isGrounded());
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space) && ActionsManager.hasJumping == true)
+        if (Input.GetKeyDown(KeyCode.Space) )
         {
             Jump();
         }
@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         //Adjustable jump height
-        if (Input.GetKeyUp(KeyCode.Space) && body.velocity.y > 0)
+        if (Input.GetKeyUp(KeyCode.Space) && body.velocity.y > 0 )
             body.velocity = new Vector2(body.velocity.x, body.velocity.y / 2);
 
         if (onWall())
