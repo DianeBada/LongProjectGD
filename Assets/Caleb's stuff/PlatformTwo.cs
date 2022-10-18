@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TheOtherFloatingPlatform : MonoBehaviour
+public class PlatformTwo : MonoBehaviour
 {
     //Using trasform so that we can get the position of the FLOATING PLATFORMS
     public Transform position1;
@@ -36,11 +36,11 @@ public class TheOtherFloatingPlatform : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //If the object that is colliding has the tag "Tag"
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                //Set the parent of that object to the platform
-                collision.transform.parent = GameObject.Find("Floating Platform (1)").transform;
-            }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            //Set the parent of that object to the platform
+            collision.transform.parent = GameObject.Find("Floating Platform (2)").transform;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
