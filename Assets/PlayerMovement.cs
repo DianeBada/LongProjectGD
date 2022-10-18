@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+//Added to manage the scene
+using UnityEngine.SceneManagement;
+
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Parameters")]
@@ -80,10 +83,14 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Caleb's stuff (Death animation):
-        //if (Input.GetKeyDown(KeyCode.Backspace))
-        //{
-        //    anim.SetBool("isDead", true);
-        //}
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            anim.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
+
+            StartCoroutine(ReloadScene());
+        }
+
         #endregion
 
         //Flip player when moving left-right
@@ -198,8 +205,9 @@ public class PlayerMovement : MonoBehaviour
         
           body.AddForce(new Vector2(-Mathf.Sign(transform.localScale.x) * wallJumpX, wallJumpY));
             wallJumpCooldown = 0;
-        
-       
+
+        //Climbing animation
+        anim.SetTrigger("isClimbing");
     }
 
 
@@ -212,6 +220,7 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
+
     }
     public bool canAttack()
     {
@@ -227,6 +236,11 @@ public class PlayerMovement : MonoBehaviour
         body.gravityScale = 0f;
         body.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         trail.emitting = true;
+
+        //Dashing animation
+        anim.SetTrigger("isDashing");
+        //
+
         yield return new WaitForSeconds(dashingTime);
         trail.emitting = false;
         body.gravityScale = originalGravity;
@@ -238,5 +252,13 @@ public class PlayerMovement : MonoBehaviour
         
 
 
+    }
+
+    private IEnumerator ReloadScene()
+    {
+        //Wait for 2 seconds
+        yield return new WaitForSeconds(2);
+
+        SceneManager.LoadScene("scene"); //reload scene
     }
 }
