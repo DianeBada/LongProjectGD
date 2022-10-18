@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActionsManager : MonoBehaviour
 {
 
-    public static int moneyCount = 50;
+    public static int moneyCount = 15;
     public static bool hasDashing = false;
     public static bool hasWalking = false;
     public static bool hasJumping = false;

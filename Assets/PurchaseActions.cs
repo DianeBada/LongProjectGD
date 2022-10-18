@@ -28,11 +28,10 @@ public class PurchaseActions : MonoBehaviour
 
     public bool canPurchase = true;
     public TextMeshProUGUI currency;
-    public TextMeshProUGUI walktext;
     public TextMeshProUGUI dashtext;
     public TextMeshProUGUI jumptext;
     public TextMeshProUGUI climbtext;
-    public TextMeshProUGUI shoottext;
+   // public TextMeshProUGUI shoottext;
 
 
    void Awake()
@@ -42,11 +41,10 @@ public class PurchaseActions : MonoBehaviour
 
 
         currency.text = "Currency:  " + ActionsManager.moneyCount.ToString();
-        walktext.text = "Run - " + walkingCost.ToString();
         dashtext.text = "Dash - " + dashingCost.ToString();
-        jumptext.text = "Triiple Jump - "+ jumpingCost.ToString();
+        jumptext.text = "3x Jump - "+ jumpingCost.ToString();
         climbtext.text = "Climb - "+ climbingCost.ToString();
-        shoottext.text = "Shoot - " + shootingCost.ToString();
+       // shoottext.text = "Shoot - " + shootingCost.ToString();
 
 
     }
@@ -60,12 +58,7 @@ public class PurchaseActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ActionsManager.actionCounter >3)
-            {
-            canPurchase = false;
-            // have UI saying sorry, cannot purchase more than 3 items
-        }
-
+        
        
         currency.text = "Currency:  " + ActionsManager.moneyCount.ToString();
 
