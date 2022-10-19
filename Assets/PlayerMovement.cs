@@ -43,9 +43,22 @@ public class PlayerMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
-    [SerializeField] private TrailRenderer trail;
+    [SerializeField] 
+    private TrailRenderer trail;
+
+    [Header("Platform")]
+    [SerializeField]
+    private LayerMask platformLayer;
+    private Transform platform;
+    private bool isOnThePlatform = false;
+    float radius = 0.4f;
 
 
+
+    void Start()
+    {
+        this.platform = null;
+    }
     private void Awake()
     {
         #region CAleb's stuff:
@@ -141,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 7;
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-            if (isGrounded())
+            if (isGrounded() || isOnThePlatform)
             {
                 coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
                 jumpCounter = extraJumps; //Reset jump counter to extra jump value
@@ -150,9 +163,34 @@ public class PlayerMovement : MonoBehaviour
                 coyoteCounter -= Time.deltaTime; //Start decreasing coyote counter when not on the ground
         }
 
-      
+
+        if (platform != null)
+        {
+            transform.parent = platform;
+        }
+        else
+        {
+            transform.parent = null;
+
+        }
+
+        if (isOnThePlatform)
+        {
+            isOnThePlatform = isOnPlatform();
+        }
     }
 
+   
+    private bool isOnPlatform()
+    {
+     RaycastHit2D hit = Physics2D.CircleCast(transform.position, radius, Vector2.down, 0.1f, platformLayer);
+    if (hit && isOnThePlatform) isOnThePlatform = true;
+    if (hit) this.platform = hit.collider.gameObject.transform;
+    else this.platform = null;
+    return hit.collider != null;
+
+  
+    }
     private void Jump()
     {
         

@@ -14,7 +14,7 @@ public class ActionsManager : MonoBehaviour
 
     public static int actionCounter = 0;
 
-   
+
 
 
 
@@ -60,33 +60,13 @@ public class ActionsManager : MonoBehaviour
     }
 
 
-    public static GameManager Instance
-    {
-        // return reference to private instance 
-        get
-        {
-            return Instance;
-        }
-    }
 
-    private static ActionsManager instance = null;
 
     void Awake()
     {
-        // Destroy secondary instances of GameManager
-        if (instance)
-        {
-            DestroyImmediate(gameObject);
-            return;
-        }
 
-        // Make this instance the only instance of GameManager
-        instance = this;
 
-        // Immortal Object
-        DontDestroyOnLoad(gameObject);
     }
-
 }
 
 

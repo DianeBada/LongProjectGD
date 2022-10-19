@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Portal : MonoBehaviour
+public class LevelTwoSceneChange : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,8 +15,9 @@ public class Portal : MonoBehaviour
 
     private void ReloadScene()
     {
-        SceneManager.LoadScene("scene"); //reload scene
+        SceneManager.LoadScene("Level2"); //reload scene
     }
 
-    
+
 }
+
