@@ -10,23 +10,24 @@ using UnityEngine.UI;
 
 public class StoreDeHellContent : MonoBehaviour
 { 
-    private string currentMenu = "Home";
 
     private GameObject[] actions;
     private GameObject[] humans;
-    public GameObject storeCanvas;
+    private GameObject storeCanvas;
     private GameObject storeIcon;
 
 
     private void Awake()
     {
-        actions = GameObject.FindGameObjectsWithTag("actions");
-       // storeCanvas = GameObject.FindGameObjectWithTag("storeCanvas");
+        storeCanvas = GameObject.Find("Store Canvas").transform.GetChild(0).gameObject;
+
+        // storeCanvas = GameObject.FindGameObjectWithTag("storeCanvas");
         storeIcon = GameObject.FindGameObjectWithTag("storeIcon");
 
 
+
         storeIcon.SetActive(true);
-        storeCanvas.SetActive(false);
+       storeCanvas.SetActive(false);
     }
 
     private void Update()

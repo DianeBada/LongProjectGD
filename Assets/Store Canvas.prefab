@@ -202,9 +202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7227702762490265104, guid: 8c748bfa7e8da5640a3367693f55775a, type: 3}
         m_TargetAssemblyTypeName: PurchaseActions, Assembly-CSharp
-        m_MethodName: PurchasingClimb
+        m_MethodName: PurchasingShoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7227702762490265104, guid: 8c748bfa7e8da5640a3367693f55775a, type: 3}
         m_TargetAssemblyTypeName: PurchaseActions, Assembly-CSharp
         m_MethodName: PurchasingClimb
         m_Mode: 1
@@ -1080,8 +1080,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 290, y: -20}
-  m_SizeDelta: {x: 65.1023, y: 71.3204}
+  m_AnchoredPosition: {x: 294.6, y: -22.899}
+  m_SizeDelta: {x: 32.5529, y: 35.6621}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3218994155859776290
 CanvasRenderer:
@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: b2524fec99df8c740888424cd004ed4a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1140,19 +1140,19 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.29622638, b: 0.29622638, a: 1}
+    m_PressedColor: {r: 0.8113208, g: 0.24798861, b: 0.24798861, a: 1}
+    m_SelectedColor: {r: 0.8117648, g: 0.24705884, b: 0.24705884, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 5c174ddce0756fe4bb0ae3caea9f9e14, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 3eb459a017ab1844ab9678cb81df3369, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 3eb459a017ab1844ab9678cb81df3369, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7227702762490265104, guid: 8c748bfa7e8da5640a3367693f55775a, type: 3}
         m_TargetAssemblyTypeName: PurchaseActions, Assembly-CSharp
         m_MethodName: PurchasingJump
         m_Mode: 1
@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7227702762490265104, guid: 8c748bfa7e8da5640a3367693f55775a, type: 3}
         m_TargetAssemblyTypeName: PurchaseActions, Assembly-CSharp
         m_MethodName: PurchasingDash
         m_Mode: 1
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9fb61aebd7d12f54fb30b04e295e3c8b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 71f8e78aa048d5c40b957c277d81022b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
