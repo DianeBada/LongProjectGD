@@ -3917,6 +3917,10 @@ PrefabInstance:
       propertyPath: climbtext
       value: 
       objectReference: {fileID: 1579810577}
+    - target: {fileID: 7227702762490265104, guid: 8c748bfa7e8da5640a3367693f55775a, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 2002791242}
     - target: {fileID: 7227702762490265108, guid: 8c748bfa7e8da5640a3367693f55775a, type: 3}
       propertyPath: m_Name
       value: Game Manager

@@ -31,10 +31,14 @@ public class PurchaseActions : MonoBehaviour
     public TextMeshProUGUI dashtext;
     public TextMeshProUGUI jumptext;
     public TextMeshProUGUI climbtext;
-   // public TextMeshProUGUI shoottext;
+    // public TextMeshProUGUI shoottext;
+
+    #region CAleb's stuff (animation):
+    public Animator playerAnimator;
+    #endregion
 
 
-   void Awake()
+    void Awake()
     {
 
 
@@ -104,6 +108,8 @@ public class PurchaseActions : MonoBehaviour
                 ActionsManager.actionCounter++;
                 hasBoughtWalk = true;
 
+                //Item Selection Animation
+                playerAnimator.SetTrigger("itemWasBought");
             }
         }
        
@@ -124,6 +130,9 @@ public class PurchaseActions : MonoBehaviour
                 ActionsManager.actionCounter++;
                 hasBoughtDash = true;
 
+                //Item Selection Animation
+                playerAnimator.SetTrigger("itemWasBought");
+
             }
         }
 
@@ -143,6 +152,9 @@ public class PurchaseActions : MonoBehaviour
                 ActionsManager.actionCounter++;
                 hasBoughtJump = true;
 
+                //Item Selection Animation
+                playerAnimator.SetTrigger("itemWasBought");
+
 
             }
         }
@@ -161,6 +173,9 @@ public class PurchaseActions : MonoBehaviour
                 ActionsManager.hasClimbing = false;
                 hasBoughtClimb = true;
 
+                //Item Selection Animation
+                playerAnimator.SetTrigger("itemWasBought");
+
 
             }
         }
@@ -178,6 +193,9 @@ public class PurchaseActions : MonoBehaviour
                 shooting = true;
                 ActionsManager.actionCounter++;
                 hasBoughtShoot = true;
+
+                //Item Selection Animation
+                playerAnimator.SetTrigger("itemWasBought");
 
 
             }
