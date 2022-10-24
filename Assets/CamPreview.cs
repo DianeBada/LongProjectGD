@@ -10,12 +10,13 @@ public class CamPreview : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCam.SetActive(false);
         StartCoroutine(Preview());
     }
 
     IEnumerator Preview()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(6);
         mainCam.SetActive(true);
         previewCam.SetActive(false);
     }
