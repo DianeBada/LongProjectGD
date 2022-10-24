@@ -31,6 +31,12 @@ public class PurchaseActions : MonoBehaviour
     public TextMeshProUGUI dashtext;
     public TextMeshProUGUI jumptext;
     public TextMeshProUGUI climbtext;
+
+    private GameObject dashIcon;
+    private GameObject climbIcon;
+    private GameObject jumpIcon;
+
+
     // public TextMeshProUGUI shoottext;
 
     #region CAleb's stuff (animation):
@@ -48,7 +54,20 @@ public class PurchaseActions : MonoBehaviour
         dashtext.text = "Dash - " + dashingCost.ToString();
         jumptext.text = "2x Jump - "+ jumpingCost.ToString();
         climbtext.text = "Climb - "+ climbingCost.ToString();
-       // shoottext.text = "Shoot - " + shootingCost.ToString();
+        // shoottext.text = "Shoot - " + shootingCost.ToString();
+
+
+        jumpIcon = GameObject.FindGameObjectWithTag("jumpIcon");
+        climbIcon = GameObject.FindGameObjectWithTag("climbIcon");
+        dashIcon = GameObject.FindGameObjectWithTag("dashIcon");
+
+        jumpIcon.SetActive(false);
+        dashIcon.SetActive(false);
+        climbIcon.SetActive(false);
+
+
+
+
 
 
     }
@@ -74,16 +93,16 @@ public class PurchaseActions : MonoBehaviour
 
         if (hasBoughtJump == true)
         {
-            // show UI for has already been bought
+            jumpIcon.SetActive(true);
         }
 
         if (hasBoughtDash == true)
         {
-            // show UI for has already been bought
-        }
+            dashIcon.SetActive(true);    
+    }
         if (hasBoughtClimb == true)
         {
-            // show UI for has already been bought
+            climbIcon.SetActive(true);
         }
         if (hasBoughtShoot == true)
         {
