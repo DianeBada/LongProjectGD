@@ -5,13 +5,26 @@ using UnityEngine;
 public class CamPreview : MonoBehaviour
 {
 
+    
+
     public GameObject mainCam;
     public GameObject previewCam;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        mainCam.SetActive(false);
-        StartCoroutine(Preview());
+        if (PlayerMovement.deathTimes < 1)
+        {
+            mainCam.SetActive(false);
+            StartCoroutine(Preview());
+        }
+        else if (PlayerMovement.deathTimes>=1)
+        {
+            mainCam.SetActive(true);
+            previewCam.SetActive(false);
+        }
+            
+
+      
     }
 
     IEnumerator Preview()

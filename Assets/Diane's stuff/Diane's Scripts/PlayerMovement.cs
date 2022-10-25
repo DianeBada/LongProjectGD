@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isOnThePlatform = false;
     float radius = 0.4f;
 
+    public static bool isReloadingScene = false;
+    public static float deathTimes = 0;
 
 
     void Start()
@@ -99,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
+            deathTimes += 1;
             anim.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
 
             StartCoroutine(ReloadScene());
@@ -294,11 +297,17 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private IEnumerator ReloadScene()
-    {
-        //Wait for 2 seconds
-        yield return new WaitForSeconds(2);
+    public IEnumerator ReloadScene()
+    { 
+      
+       
+            //Wait for 2 seconds
+            yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene("scene"); //reload scene
+            SceneManager.LoadScene("scene"); //reload scene
+
+       
+
+
     }
 }

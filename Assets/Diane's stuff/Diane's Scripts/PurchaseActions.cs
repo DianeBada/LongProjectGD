@@ -32,9 +32,9 @@ public class PurchaseActions : MonoBehaviour
     public TextMeshProUGUI jumptext;
     public TextMeshProUGUI climbtext;
 
-    private GameObject dashIcon;
-    private GameObject climbIcon;
-    private GameObject jumpIcon;
+   public static GameObject dashIcon;
+    public  static GameObject climbIcon;
+   public static GameObject jumpIcon;
 
 
     // public TextMeshProUGUI shoottext;

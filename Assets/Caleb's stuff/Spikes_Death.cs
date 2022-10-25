@@ -11,6 +11,7 @@ public class Spikes_Death : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+           PlayerMovement.deathTimes = +1;
             playerAnimator.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
 
             StartCoroutine(ReloadScene());
@@ -23,5 +24,12 @@ public class Spikes_Death : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene("scene"); //reload scene
+        if(PurchaseActions.jumpIcon.activeInHierarchy)
+        {
+            PurchaseActions.jumpIcon.SetActive(true);
+        }
+        else
+            PurchaseActions.jumpIcon.SetActive(false);
+
     }
 }
