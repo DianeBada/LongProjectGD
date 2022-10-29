@@ -50,7 +50,7 @@ public class PurchaseActions : MonoBehaviour
 
 
 
-        currency.text = "Currency:  " + ActionsManager.moneyCount.ToString();
+        currency.text = "currency: " + ActionsManager.moneyCount.ToString();
         dashtext.text = "Dash - " + dashingCost.ToString();
         jumptext.text = "2x Jump - "+ jumpingCost.ToString();
         climbtext.text = "Climb - "+ climbingCost.ToString();
@@ -83,7 +83,7 @@ public class PurchaseActions : MonoBehaviour
     {
         
        
-        currency.text = "Currency:  " + ActionsManager.moneyCount.ToString();
+        currency.text = "currency: " + ActionsManager.moneyCount.ToString();
 
 
         if(hasBoughtWalk == true)
