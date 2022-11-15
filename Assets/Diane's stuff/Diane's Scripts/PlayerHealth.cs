@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject player;
    public static bool isTempDead;
     public static bool isDead;
+    public TextMeshProUGUI livesText;
 
 
     // Start is called before the first frame update
@@ -22,6 +24,13 @@ public class PlayerHealth : MonoBehaviour
         SetMaxHealthValue();
     }
 
+    void Update()
+    {
+
+        SetHealth(playerHealth);
+        livesText.text = "X" + playerLives.ToString();
+
+    }
     public void DeductHealth(float deductHealth)
     {
         playerHealth -= deductHealth;
@@ -54,7 +63,6 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.tag == "enemies")
         {
 
-            // Debug.Log(PickUp.throwForceValue);
             DeductHealth(15);
             Debug.Log(playerHealth);
 
