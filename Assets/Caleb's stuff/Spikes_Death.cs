@@ -12,24 +12,20 @@ public class Spikes_Death : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
            PlayerMovement.deathTimes = +1;
+            PlayerHealth.playerHealth -= 100;
             playerAnimator.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
 
-            StartCoroutine(ReloadScene());
+            if (PlayerHealth.playerLives>0 )
+            {
+                PlayerHealth.isTempDead = true;
+            }
+            else
+            {
+                PlayerHealth.isDead = true;
+                //Game Over : Game Over Scene
+            }
         }
     }
 
-    private IEnumerator ReloadScene()
-    {
-        //Wait for 2 seconds
-        yield return new WaitForSeconds(2);
-
-        SceneManager.LoadScene("scene"); //reload scene
-        if(PurchaseActions.jumpIcon.activeInHierarchy)
-        {
-            PurchaseActions.jumpIcon.SetActive(true);
-        }
-        else
-            PurchaseActions.jumpIcon.SetActive(false);
-
-    }
+   
 }
