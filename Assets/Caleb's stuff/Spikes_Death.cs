@@ -13,7 +13,7 @@ public class Spikes_Death : MonoBehaviour
         {
             PlayerMovement.deathTimes = +1;
             PlayerHealth.playerHealth -= 100;
-            PlayerHealth.playerLives--;
+            PlayerHealth.playerLives -= 1 ;
 
             //playerAnimator.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
 

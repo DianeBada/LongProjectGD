@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2101873965820243795, guid: f21c619a87c261744a969b8fa5bb849d, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2101873965820243795, guid: f21c619a87c261744a969b8fa5bb849d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -428,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2101873965820243823, guid: f21c619a87c261744a969b8fa5bb849d, type: 3}
       propertyPath: m_Name
-      value: Store Canvas
+      value: ' Store Canvas'
       objectReference: {fileID: 0}
     - target: {fileID: 2881033014790507146, guid: f21c619a87c261744a969b8fa5bb849d, type: 3}
       propertyPath: m_AnchorMax.x

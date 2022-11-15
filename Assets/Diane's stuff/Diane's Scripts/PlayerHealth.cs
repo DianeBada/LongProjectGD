@@ -40,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
 
             // implement text that shows amount of lives and changes it accordingly.
             livesText.text = "x" + playerLives.ToString();
+            Debug.Log(playerLives);
             isTempDead = true;
             StartCoroutine(LevelRestart());
 
