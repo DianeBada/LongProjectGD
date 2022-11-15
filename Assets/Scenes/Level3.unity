@@ -44137,6 +44137,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HideStore
       objectReference: {fileID: 0}
+    - target: {fileID: 4655481867073663754, guid: 8939700cb2228b649862c01f6314e1a2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655481867073663754, guid: 8939700cb2228b649862c01f6314e1a2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 156.21
+      objectReference: {fileID: 0}
     - target: {fileID: 4655481867497472808, guid: 8939700cb2228b649862c01f6314e1a2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
