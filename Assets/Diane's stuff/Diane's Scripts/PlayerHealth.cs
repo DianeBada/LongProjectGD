@@ -9,17 +9,23 @@ public class PlayerHealth : MonoBehaviour
     public Slider slider;
     //public PickUp objectScript;
     public static float playerHealth = 100f;
-    public static int playerLives = 2;
+    public static int playerLives = 4;
     public GameObject startPos;
     public GameObject player;
    public static bool isTempDead;
     public static bool isDead;
     public TextMeshProUGUI livesText;
+    public GameObject camStart;
+    public Camera mainCam;
+    public Animator playerAnimator;
+
 
 
     // Start is called before the first frame update
     public void Start()
     {
+        livesText.text = "x" + playerLives.ToString();
+
         playerHealth = slider.maxValue;
         SetMaxHealthValue();
     }
@@ -29,34 +35,39 @@ public class PlayerHealth : MonoBehaviour
 
         SetHealth(playerHealth);
 
-        livesText.text = "x" + playerLives.ToString();
+        if (playerHealth <= 0 && playerLives > 0)
+        {
+
+            // implement text that shows amount of lives and changes it accordingly.
+            livesText.text = "x" + playerLives.ToString();
+            isTempDead = true;
+            StartCoroutine(LevelRestart());
+
+
+            // make a function that takes them back to the beginning.
+        }
+        else if (playerHealth <= 0 && playerLives <= 0)
+        {
+            isDead = true;
+            StartCoroutine(LevelRestart());
+
+            //playerDead();
+
+            // Game Over Scene
+        }
+
 
     }
     public void DeductHealth(float deductHealth)
     {
         playerHealth -= deductHealth;
         SetHealth(playerHealth);
-        if (playerHealth <= 0 && playerLives>0)
-        {
-           
-            // implement text that shows amount of lives and changes it accordingly.
-            playerLives = -1;
-            isTempDead = true;
-            playerDead();
-            // make a function that takes them back to the beginning.
-        }
-        else if(playerHealth <=0 && playerLives <=0)
-        {
-            isDead = true;
-            playerDead();
-
-            // Game Over Scene
-        }
+      
     }
 
     void playerDead()
     {
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -71,7 +82,11 @@ public class PlayerHealth : MonoBehaviour
 
         else if (collision.gameObject.tag == "spikes")
         {
+           
             DeductHealth(100);
+            playerLives--;
+
+
 
         }
 
@@ -92,13 +107,28 @@ public class PlayerHealth : MonoBehaviour
         slider.value = playerHealth;
     }
 
-    public void levelRestart()
-    {
-        if(isTempDead == true)
+    //public void levelRestart()
+    //{
+    //    if(isTempDead == true)
+    //    {
+    //        WaitForSeconds(2f);
+    //        player.transform.position = startPos.transform.position;
+    //        mainCam.transform.position = camStart.transform.position;
+
+    //    }
+
+        IEnumerator LevelRestart()
         {
-            player.transform.position = startPos.transform.position;
+        if (isTempDead == true)
+        {
+            yield return new WaitForSeconds(1f);
+           player.transform.position = startPos.transform.position;
+            //mainCam.transform.position = camStart.transform.position;
+            yield return new WaitForSeconds(.5f);
+            playerHealth = 50;
+
         }
-    }
+}
 }
 
 
