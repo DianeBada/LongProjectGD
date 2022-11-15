@@ -11,8 +11,6 @@ using UnityEngine.UI;
 public class StoreDeHellContent : MonoBehaviour
 { 
 
-    private GameObject[] actions;
-    private GameObject[] humans;
     private GameObject storeCanvas;
     private GameObject storeIcon;
 
