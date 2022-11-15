@@ -28,11 +28,8 @@ public class PlayerHealth : MonoBehaviour
     {
 
         SetHealth(playerHealth);
-<<<<<<< Updated upstream
-        livesText.text = "X" + playerLives.ToString();
-=======
+
         livesText.text = "x" + playerLives.ToString();
->>>>>>> Stashed changes
 
     }
     public void DeductHealth(float deductHealth)
