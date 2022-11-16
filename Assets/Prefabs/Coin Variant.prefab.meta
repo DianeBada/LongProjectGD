@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/L4.unity.meta
+guid: 106c2b0ba2bf80844bca30dd7307b357
+DefaultImporter:
+========
 guid: 80fd765f832a33f41ad0cb1fb3586daf
 PrefabImporter:
+>>>>>>>> 73a1e2b3330ad753fac0dcc9cf0f070598bf7128:Assets/Prefabs/Coin Variant.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
