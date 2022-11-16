@@ -97,9 +97,9 @@ public class PatrollingEnemy : MonoBehaviour
 
     void Move()
     {
-        anim.SetBool("canWalk", true);
+       // anim.SetBool("canWalk", true);
 
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
+      //  if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
         {
             Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
 
