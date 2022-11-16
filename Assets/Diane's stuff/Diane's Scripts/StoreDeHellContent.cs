@@ -104,7 +104,46 @@ public class StoreDeHellContent : MonoBehaviour
                 }
 
 
+                else if(sceneName == "Level_Two")
+                {
+                   
+                        // Do something...
+                        jumpingStore.SetActive(true);
+                        climbingStore.SetActive(true);
+                        dashingStore.SetActive(true);
+                        shootingStore.SetActive(false);
+                        shrinkingStore.SetActive(false);
 
+
+                    }
+
+                else if (sceneName == "Level_Three")
+                {
+
+                    // Do something...
+                    jumpingStore.SetActive(true);
+                    climbingStore.SetActive(true);
+                    dashingStore.SetActive(true);
+                    shootingStore.SetActive(true);
+                    shrinkingStore.SetActive(true);
+
+
+                }
+
+                else if (sceneName == "Level_Four")
+                {
+
+                    // Do something...
+                    jumpingStore.SetActive(true);
+                    climbingStore.SetActive(true);
+                    dashingStore.SetActive(true);
+                    shootingStore.SetActive(true);
+                    shrinkingStore.SetActive(true);
+
+
+                }
+
+            }
 
 
             }
@@ -118,4 +157,4 @@ public class StoreDeHellContent : MonoBehaviour
 
 
 
-}
+

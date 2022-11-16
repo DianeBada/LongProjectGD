@@ -11,6 +11,7 @@ public class ActionsManager : MonoBehaviour
     public static bool hasJumping = false;
     public static bool hasShooting = false;
     public static bool hasClimbing = false;
+    public static bool hasShrinking = false;
 
     public static int actionCounter = 0;
 
@@ -58,6 +59,10 @@ public class ActionsManager : MonoBehaviour
         get { return hasShooting; }
         set { hasShooting = value; }
     }
+
+
+
+
 
 
 

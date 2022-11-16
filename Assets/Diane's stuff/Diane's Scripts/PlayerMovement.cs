@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
     public static bool isReloadingScene = false;
     public static float deathTimes = 0;
 
+    bool hasShrunk = false;
+
 
     void Start()
     {
@@ -97,17 +99,17 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
 
-        #region Caleb's stuff (Death animation):
+        //#region Caleb's stuff (Death animation):
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            deathTimes += 1;
-            anim.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
+        //if (Input.GetKeyDown(KeyCode.Backspace))
+        //{
+        //    deathTimes += 1;
+        //    anim.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
 
-            StartCoroutine(ReloadScene());
-        }
+        //    StartCoroutine(ReloadScene());
+        //}
 
-        #endregion
+        
 
         //Flip player when moving left-right
         if (horizontalInput > 0.01f)
@@ -145,12 +147,29 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 0;
             body.velocity = Vector2.zero;
         }
+        if (Input.GetKey(KeyCode.B) && ActionsManager.hasShrinking == true)
+        {
+            if (hasShrunk == false)
+            {
+                transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                hasShrunk = true;
+
+            }
+            else if (hasShrunk == true)
+            {
+                transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                hasShrunk = false;
+            }
+
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && ActionsManager.hasDashing == true)
         {
             Debug.Log("Dashing");
             StartCoroutine(Dash());
         }
+
+      
 
         else
         {
