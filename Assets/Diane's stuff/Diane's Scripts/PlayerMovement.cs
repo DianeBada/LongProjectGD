@@ -117,6 +117,21 @@ public class PlayerMovement : MonoBehaviour
         else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(-0.7f, 0.7f, 0.7f);
 
+
+        if (horizontalInput > 0.01f && hasShrunk == true)
+                {
+
+            body.transform.localScale = new Vector2(0.3f, 0.3f);
+
+
+        }
+
+        else if(horizontalInput < -0.01f && hasShrunk == true)
+            {
+            body.transform.localScale = new Vector2(0.3f, 0.3f);
+
+        }
+
         //Set animator parameters
         //anim.SetBool("run", horizontalInput != 0);
         //anim.SetBool("grounded", isGrounded());
