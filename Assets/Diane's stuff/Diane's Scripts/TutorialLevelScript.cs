@@ -20,6 +20,10 @@ public class TutorialLevelScript : MonoBehaviour
     public bool colCherry = false;
     public bool colApricot = false;
     public bool enterTrigger = false;
+    public bool hitSpikes = false;
+    public GameObject player;
+    public GameObject startPos;
+
 
 
     // Start is called before the first frame update
@@ -55,7 +59,7 @@ public class TutorialLevelScript : MonoBehaviour
         {
             colCherry = true;
             ActionsManager.hasJumping = true;
-          PurchaseActions.jumping = true;
+            PurchaseActions.jumping = true;
             PlayerMovement.extraJumps = 1;
         }
         if (collision.gameObject.CompareTag("apricot-dash"))
@@ -64,7 +68,12 @@ public class TutorialLevelScript : MonoBehaviour
             ActionsManager.hasDashing = true;
         }
 
-        
+         if (collision.gameObject.tag == "spikes")
+        {
+
+            hitSpikes = true;
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -90,14 +99,14 @@ public class TutorialLevelScript : MonoBehaviour
     }
 
 
-    
-       
-    
+
+
+
 
     IEnumerator ShowMessage()
     {
-        
-        if(CamPreview.isDonePreview == true)
+
+        if (CamPreview.isDonePreview == true)
         {
 
             yield return new WaitForSeconds(6);
@@ -114,7 +123,7 @@ public class TutorialLevelScript : MonoBehaviour
 
             }
         }
-      
+
 
         if (hitJumpTrigger == true)
         {
@@ -162,7 +171,7 @@ public class TutorialLevelScript : MonoBehaviour
         }
 
 
-       
+
         if (spikesTrigger == true)
         {
             SpikesPanel.gameObject.SetActive(true);
@@ -170,6 +179,17 @@ public class TutorialLevelScript : MonoBehaviour
             yield return new WaitForSeconds(3f);
             SpikesPanel.gameObject.SetActive(false);
             spikesTrigger = false;
+        }
+    }
+
+    IEnumerator LevelRestart()
+    {
+        if (hitSpikes == true)
+        {
+            yield return new WaitForSeconds(1f);
+            player.transform.position = startPos.transform.position;
+            //mainCam.transform.position = camStart.transform.position;
+
         }
     }
 }
