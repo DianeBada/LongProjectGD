@@ -13,6 +13,9 @@ public class TutorialLevelScript : MonoBehaviour
     public GameObject CherryDJumpPanel;
     public GameObject ApricotDashPanel;
     public GameObject SpikesPanel;
+    public GameObject coinsPanel;
+
+
     public bool spikesTrigger = false;
     public bool exitTrigger = false;
     public bool hitJumpTrigger = false;
@@ -21,6 +24,7 @@ public class TutorialLevelScript : MonoBehaviour
     public bool colApricot = false;
     public bool enterTrigger = false;
     public bool hitSpikes = false;
+    public bool hasCoins = false;
     public GameObject player;
     public GameObject startPos;
 
@@ -29,8 +33,9 @@ public class TutorialLevelScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        coinsPanel.SetActive(false);
         MovementPanel.gameObject.SetActive(false);
-        BananaClimbPanel.SetActive(true);
+        BananaClimbPanel.SetActive(false);
         jumpPanel.SetActive(false);
         CherryDJumpPanel.SetActive(false);
         BananaClimbPanel.SetActive(false);
@@ -44,6 +49,13 @@ public class TutorialLevelScript : MonoBehaviour
     void Update()
     {
         StartCoroutine(ShowMessage());
+
+
+        if (hitSpikes == true)
+        {
+            SceneManager.LoadScene(("Level_Tutorial"));
+
+        }
     }
 
 
@@ -52,6 +64,7 @@ public class TutorialLevelScript : MonoBehaviour
         if (collision.gameObject.CompareTag("bannana-climb"))
         {
             collBanana = true;
+
             PurchaseActions.climbing = true;
         }
 
@@ -72,6 +85,10 @@ public class TutorialLevelScript : MonoBehaviour
         {
 
             hitSpikes = true;
+        }
+        if (collision.gameObject.CompareTag("coins"))
+        {
+            hasCoins = true;
         }
 
     }
@@ -140,7 +157,7 @@ public class TutorialLevelScript : MonoBehaviour
         {
             BananaClimbPanel.gameObject.SetActive(true);
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(4f);
             BananaClimbPanel.gameObject.SetActive(false);
             collBanana = false;
 
@@ -152,7 +169,7 @@ public class TutorialLevelScript : MonoBehaviour
         {
             CherryDJumpPanel.gameObject.SetActive(true);
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(4f);
             CherryDJumpPanel.gameObject.SetActive(false);
             colCherry = false;
 
@@ -163,7 +180,7 @@ public class TutorialLevelScript : MonoBehaviour
         {
             ApricotDashPanel.gameObject.SetActive(true);
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(4f);
             ApricotDashPanel.gameObject.SetActive(false);
             colApricot = false;
 
@@ -176,20 +193,21 @@ public class TutorialLevelScript : MonoBehaviour
         {
             SpikesPanel.gameObject.SetActive(true);
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(4f);
             SpikesPanel.gameObject.SetActive(false);
             spikesTrigger = false;
         }
-    }
 
-    IEnumerator LevelRestart()
-    {
-        if (hitSpikes == true)
+        if (hasCoins == true)
         {
-            yield return new WaitForSeconds(1f);
-            player.transform.position = startPos.transform.position;
-            //mainCam.transform.position = camStart.transform.position;
+            coinsPanel.gameObject.SetActive(true);
 
+            yield return new WaitForSeconds(4f);
+            coinsPanel.gameObject.SetActive(false);
+            hasCoins = false;
         }
+
+
     }
+
 }

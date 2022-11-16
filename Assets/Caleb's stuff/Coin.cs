@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    
+    public AudioClip coinSound;
+    private AudioSource myAudio;
+
+   void Start()
+    {
+        myAudio = GetComponent < AudioSource >() ;
+    }
     void Update()
     {
         //Continously rotates
@@ -15,9 +21,13 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            ActionsManager.moneyCount += 3;
+            myAudio.PlayOneShot(coinSound);
+
+            ActionsManager.moneyCount += 1;
 
             this.gameObject.SetActive(false);
         }
     }
+
+
 }
