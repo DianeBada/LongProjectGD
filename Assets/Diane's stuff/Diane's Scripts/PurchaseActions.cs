@@ -47,9 +47,11 @@ public class PurchaseActions : MonoBehaviour
     public static GameObject shrinkIcon;
     public static GameObject shootIcon;
 
-   
 
 
+
+    public static bool displayShrinkMessage = false;
+    public static bool displayShootMessage = false;
 
 
 
@@ -163,6 +165,7 @@ public class PurchaseActions : MonoBehaviour
 
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
+                displayShrinkMessage = true;
             }
         }
 
@@ -245,7 +248,7 @@ public class PurchaseActions : MonoBehaviour
                 shrinking = true;
                 ActionsManager.hasShrinking = false;
                 hasBoughtShrink = true;
-
+                displayShrinkMessage = true;
                 playerAnimator.SetTrigger("itemWasBought");
 
 
@@ -265,9 +268,11 @@ public class PurchaseActions : MonoBehaviour
                 shooting = true;
                 ActionsManager.actionCounter++;
                 hasBoughtShoot = true;
-
+                displayShrinkMessage = true;
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
+
+
 
 
             }
@@ -276,7 +281,7 @@ public class PurchaseActions : MonoBehaviour
         }
     }
 
-
+       
     
 }
 

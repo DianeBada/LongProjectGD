@@ -147,17 +147,20 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 0;
             body.velocity = Vector2.zero;
         }
-        if (Input.GetKey(KeyCode.B) && ActionsManager.hasShrinking == true)
+        if (Input.GetKeyDown(KeyCode.E) && PurchaseActions.shrinking==true)
         {
+            Debug.Log("is shrinking");
             if (hasShrunk == false)
             {
-                transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                body.transform.localScale = new Vector2(0.3f, 0.3f);
                 hasShrunk = true;
 
             }
             else if (hasShrunk == true)
             {
-                transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                Debug.Log("is not shrinking");
+
+                body.transform.localScale = new Vector2(0.7f, 0.7f);
                 hasShrunk = false;
             }
 
