@@ -64,6 +64,7 @@ public class PurchaseActions : MonoBehaviour
         jumpIcon.SetActive(false);
         dashIcon.SetActive(false);
         climbIcon.SetActive(false);
+        
 
 
 
