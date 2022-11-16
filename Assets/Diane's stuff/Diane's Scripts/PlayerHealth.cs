@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public Slider slider;
     //public PickUp objectScript;
     public static float playerHealth = 100f;
-    public static int playerLives = 4;
+    public static int playerLives = 2;
     public GameObject startPos;
     public GameObject player;
    public static bool isTempDead;
@@ -32,7 +32,15 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        if(StoreDeHellContent.isOpen == true)
+        {
+            slider.gameObject.SetActive(false);
+        }
+        else
+        {
+            slider.gameObject.SetActive(true);
 
+        }
         SetHealth(playerHealth);
 
         if (playerHealth <= 0 && playerLives > 0)
@@ -49,9 +57,10 @@ public class PlayerHealth : MonoBehaviour
         }
         else if (playerHealth <= 0 && playerLives <= 0)
         {
+            livesText.text = "0";
             isDead = true;
-            StartCoroutine(LevelRestart());
-
+            Time.timeScale = 0;
+            Debug.Log("Game Over");
             //playerDead();
 
             // Game Over Scene
@@ -85,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
         {
            
             DeductHealth(100);
-            playerLives--;
+            playerLives-=1;
 
 
 
@@ -126,7 +135,7 @@ public class PlayerHealth : MonoBehaviour
            player.transform.position = startPos.transform.position;
             //mainCam.transform.position = camStart.transform.position;
             yield return new WaitForSeconds(.5f);
-            playerHealth = 50;
+            playerHealth = 100;
 
         }
 }

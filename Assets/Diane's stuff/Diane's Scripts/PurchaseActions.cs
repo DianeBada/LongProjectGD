@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PurchaseActions : MonoBehaviour
 {
@@ -10,7 +11,9 @@ public class PurchaseActions : MonoBehaviour
     private int walkingCost = 6;
     private int jumpingCost = 6;
     private int climbingCost = 6;
-    private int shootingCost = 6;
+    private int shootingCost = 8;
+    private int shrinkCost = 6;
+
 
 
     public bool dashing = false;
@@ -18,7 +21,7 @@ public class PurchaseActions : MonoBehaviour
     public static bool jumping = false;
     public bool shooting = false;
     public static bool climbing = false;
-    public bool hasBoughtWalk = false; 
+    public bool hasBoughtWalk = false;
     public bool hasBoughtJump = false;
     public bool hasBoughtShoot = false;
     public bool hasBoughtClimb = false;
@@ -27,14 +30,25 @@ public class PurchaseActions : MonoBehaviour
 
 
     public bool canPurchase = true;
-    public TextMeshProUGUI currency;
-    public TextMeshProUGUI dashtext;
+    public  TextMeshProUGUI currency;
+    public  TextMeshProUGUI dashtext;
     public TextMeshProUGUI jumptext;
-    public TextMeshProUGUI climbtext;
+    public  TextMeshProUGUI climbtext;
+    public  TextMeshProUGUI shoottext;
+    public TextMeshProUGUI shrinktext;
 
-   public static GameObject dashIcon;
-    public  static GameObject climbIcon;
-   public static GameObject jumpIcon;
+
+
+    public static GameObject dashIcon;
+    public static GameObject climbIcon;
+    public static GameObject jumpIcon;
+    public static GameObject shrinkIcon;
+    public static GameObject shootIcon;
+
+   
+
+
+
 
 
     // public TextMeshProUGUI shoottext;
@@ -52,19 +66,30 @@ public class PurchaseActions : MonoBehaviour
 
         currency.text = "currency: " + ActionsManager.moneyCount.ToString();
         dashtext.text = "Dash - " + dashingCost.ToString();
-        jumptext.text = "2x Jump - "+ jumpingCost.ToString();
-        climbtext.text = "Climb - "+ climbingCost.ToString();
+        jumptext.text = "2x Jump - " + jumpingCost.ToString();
+        climbtext.text = "Climb - " + climbingCost.ToString();
+        shrinktext.text = "Shrink - " + shrinkCost.ToString();
+        shoottext.text = "Climb - " + shootingCost.ToString();
+
+
+
         // shoottext.text = "Shoot - " + shootingCost.ToString();
 
 
         jumpIcon = GameObject.FindGameObjectWithTag("jumpIcon");
         climbIcon = GameObject.FindGameObjectWithTag("climbIcon");
         dashIcon = GameObject.FindGameObjectWithTag("dashIcon");
+        shrinkIcon = GameObject.FindGameObjectWithTag("shrinkIcon");
+        shootIcon = GameObject.FindGameObjectWithTag("shootIcon");
+
+
 
         jumpIcon.SetActive(false);
         dashIcon.SetActive(false);
         climbIcon.SetActive(false);
-        
+        shrinkIcon.SetActive(false);
+        shootIcon.SetActive(false);
+
 
 
 
@@ -76,18 +101,18 @@ public class PurchaseActions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-       
+
+
         currency.text = "currency: " + ActionsManager.moneyCount.ToString();
 
 
-        if(hasBoughtWalk == true)
+        if (hasBoughtWalk == true)
         {
             // show UI for has already been bought
         }
@@ -99,8 +124,8 @@ public class PurchaseActions : MonoBehaviour
 
         if (hasBoughtDash == true)
         {
-            dashIcon.SetActive(true);    
-    }
+            dashIcon.SetActive(true);
+        }
         if (hasBoughtClimb == true)
         {
             climbIcon.SetActive(true);
@@ -132,7 +157,7 @@ public class PurchaseActions : MonoBehaviour
                 playerAnimator.SetTrigger("itemWasBought");
             }
         }
-       
+
     }
 
     public void PurchasingDash()
@@ -225,11 +250,8 @@ public class PurchaseActions : MonoBehaviour
     }
 
 
-          
-
-          
-
-        }
+    
+}
 
 
     

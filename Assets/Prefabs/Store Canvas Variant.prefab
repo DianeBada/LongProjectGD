@@ -771,7 +771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4949769056722282058, guid: 85c5505be9e79d6439003008deeb4f05, type: 3}
       propertyPath: m_Name
-      value: Store Canvas
+      value: Store Canvas Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4949769056722282058, guid: 85c5505be9e79d6439003008deeb4f05, type: 3}
       propertyPath: m_IsActive
@@ -791,7 +791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4949769056722282102, guid: 85c5505be9e79d6439003008deeb4f05, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4949769056722282102, guid: 85c5505be9e79d6439003008deeb4f05, type: 3}
       propertyPath: m_AnchorMax.x
