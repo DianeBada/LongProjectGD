@@ -10,7 +10,6 @@ public class LevelMusic : MonoBehaviour
     void Start()
     {
         levelMusic = GetComponent<AudioSource>();
-        levelMusic.Play(0);
         Debug.Log("started");
     }
 

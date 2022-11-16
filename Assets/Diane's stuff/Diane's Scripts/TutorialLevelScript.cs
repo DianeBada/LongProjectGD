@@ -7,31 +7,32 @@ using UnityEngine.UI;
 
 public class TutorialLevelScript : MonoBehaviour
 {
-    public GameObject MovementText;
-    public GameObject jumpTrigger;
-    public GameObject jumpText;
-    public GameObject BannaClimbText;
-    public GameObject CherryDJumpText;
-    public GameObject ApricotDashText;
-    public GameObject Panel;
+    public GameObject MovementPanel;
+    public GameObject jumpPanel;
+    public GameObject BananaClimbPanel;
+    public GameObject CherryDJumpPanel;
+    public GameObject ApricotDashPanel;
+    public GameObject SpikesPanel;
+    public bool spikesTrigger = false;
+    public bool exitTrigger = false;
+    public bool hitJumpTrigger = false;
+    public bool collBanana = false;
+    public bool colCherry = false;
+    public bool colApricot = false;
+    public bool enterTrigger = false;
 
-
-    bool hitJumpTrigger = false;
-    bool collBanana = false;
-    bool colCherry = false;
-    bool colApricot = false;
-   
 
     // Start is called before the first frame update
     void Start()
     {
-        Panel.gameObject.SetActive(true);
-        MovementText.SetActive(true);
-        jumpText.SetActive(false);
-        jumpTrigger.SetActive(false);
-        BannaClimbText.SetActive(false);
-        CherryDJumpText.SetActive(false);
-        ApricotDashText.SetActive(false);
+        MovementPanel.gameObject.SetActive(false);
+        BananaClimbPanel.SetActive(true);
+        jumpPanel.SetActive(false);
+        CherryDJumpPanel.SetActive(false);
+        BananaClimbPanel.SetActive(false);
+        ApricotDashPanel.SetActive(false);
+        SpikesPanel.SetActive(false);
+
 
     }
 
@@ -41,14 +42,10 @@ public class TutorialLevelScript : MonoBehaviour
         StartCoroutine(ShowMessage());
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("jumpTrigger"))
-        {
-            hitJumpTrigger = true;
-            
-        }
-        if (collision.gameObject.CompareTag("bannanaClimb"))
+        if (collision.gameObject.CompareTag("bannana-climb"))
         {
             collBanana = true;
             PurchaseActions.climbing = true;
@@ -57,76 +54,122 @@ public class TutorialLevelScript : MonoBehaviour
         if (collision.gameObject.CompareTag("cherry-doubleJump"))
         {
             colCherry = true;
-            ActionsManager.HasJumping = true;
-           
+            ActionsManager.hasJumping = true;
+          PurchaseActions.jumping = true;
+            PlayerMovement.extraJumps = 1;
         }
         if (collision.gameObject.CompareTag("apricot-dash"))
         {
             colApricot = true;
             ActionsManager.hasDashing = true;
         }
+
+        
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("jumpTrigger"))
+        {
+            hitJumpTrigger = true;
+
+        }
+
+        if (other.gameObject.CompareTag("exitTrigger"))
+        {
+            exitTrigger = true;
+        }
+        if (other.gameObject.CompareTag("spikesTrigger"))
+        {
+            spikesTrigger = true;
+        }
+
+        if (other.gameObject.CompareTag("enterTrigger"))
+        {
+            enterTrigger = true;
+        }
+    }
+
+
+    
+       
+    
 
     IEnumerator ShowMessage()
     {
-        //yield return new WaitForSeconds(1f);
-        //Panel.gameObject.SetActive(false);
+        
+        if(CamPreview.isDonePreview == true)
+        {
 
-        //MovementText.SetActive(false);
+            yield return new WaitForSeconds(6);
+            if (enterTrigger == true)
+            {
+                MovementPanel.gameObject.SetActive(true);
+                yield return new WaitForSeconds(2f);
+                MovementPanel.gameObject.SetActive(false);
+
+                enterTrigger = false;
+
+
+
+
+            }
+        }
+      
 
         if (hitJumpTrigger == true)
         {
-            Panel.gameObject.SetActive(true);
+            jumpPanel.gameObject.SetActive(true);
 
-            jumpText.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            Panel.gameObject.SetActive(false);
+            yield return new WaitForSeconds(3f);
+            jumpPanel.gameObject.SetActive(false);
+            hitJumpTrigger = false;
 
-            jumpText.SetActive(false);
 
 
         }
         if (collBanana == true)
         {
-            Panel.gameObject.SetActive(true);
+            BananaClimbPanel.gameObject.SetActive(true);
 
-            BannaClimbText.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            Panel.gameObject.SetActive(false);
+            yield return new WaitForSeconds(3f);
+            BananaClimbPanel.gameObject.SetActive(false);
+            collBanana = false;
 
-            BannaClimbText.SetActive(false);
 
 
         }
 
         if (colCherry == true)
         {
-            Panel.gameObject.SetActive(true);
+            CherryDJumpPanel.gameObject.SetActive(true);
 
-            CherryDJumpText.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            Panel.gameObject.SetActive(false);
-
-            CherryDJumpText.SetActive(false);
+            yield return new WaitForSeconds(3f);
+            CherryDJumpPanel.gameObject.SetActive(false);
+            colCherry = false;
 
 
         }
 
-        if (ApricotDashText == true)
+        if (colApricot == true)
         {
-            Panel.gameObject.SetActive(true);
+            ApricotDashPanel.gameObject.SetActive(true);
 
-            ApricotDashText.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            Panel.gameObject.SetActive(false);
-
-            ApricotDashText.SetActive(false);
+            yield return new WaitForSeconds(3f);
+            ApricotDashPanel.gameObject.SetActive(false);
+            colApricot = false;
 
 
         }
 
 
+       
+        if (spikesTrigger == true)
+        {
+            SpikesPanel.gameObject.SetActive(true);
 
-
+            yield return new WaitForSeconds(3f);
+            SpikesPanel.gameObject.SetActive(false);
+            spikesTrigger = false;
+        }
     }
 }
