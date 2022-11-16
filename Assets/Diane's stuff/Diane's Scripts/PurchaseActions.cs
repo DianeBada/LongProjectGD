@@ -19,13 +19,16 @@ public class PurchaseActions : MonoBehaviour
     public bool dashing = false;
     public bool walking = false;
     public static bool jumping = false;
-    public bool shooting = false;
+    public static bool shooting = false;
     public static bool climbing = false;
+    public static bool shrinking = false;
+
     public bool hasBoughtWalk = false;
     public bool hasBoughtJump = false;
     public bool hasBoughtShoot = false;
     public bool hasBoughtClimb = false;
     public bool hasBoughtDash = false;
+    public bool hasBoughtShrink = false;
 
 
 
@@ -45,9 +48,11 @@ public class PurchaseActions : MonoBehaviour
     public static GameObject shrinkIcon;
     public static GameObject shootIcon;
 
-   
 
 
+
+    public static bool displayShrinkMessage = false;
+    public static bool displayShootMessage = false;
 
 
 
@@ -132,7 +137,13 @@ public class PurchaseActions : MonoBehaviour
         }
         if (hasBoughtShoot == true)
         {
+            shootIcon.SetActive(true);
             // show UI for has already been bought
+        }
+
+        if(hasBoughtShrink == true)
+        {
+            shrinkIcon.SetActive(true);
         }
 
     }
@@ -155,6 +166,7 @@ public class PurchaseActions : MonoBehaviour
 
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
+                displayShrinkMessage = true;
             }
         }
 
@@ -226,6 +238,25 @@ public class PurchaseActions : MonoBehaviour
         }
     }
 
+    public void PurchasingShrink()
+    {
+        if (canPurchase && !hasBoughtShrink)
+        {
+            if (ActionsManager.moneyCount > shrinkCost)
+            {
+                ActionsManager.moneyCount -= shrinkCost;
+                ActionsManager.hasShrinking = true;
+                shrinking = true;
+                ActionsManager.hasShrinking = false;
+                hasBoughtShrink = true;
+                displayShrinkMessage = true;
+                playerAnimator.SetTrigger("itemWasBought");
+
+
+            }
+        }
+    }
+
     public void PurchasingShoot()
     {
         if (canPurchase && !hasBoughtShoot)
@@ -238,9 +269,11 @@ public class PurchaseActions : MonoBehaviour
                 shooting = true;
                 ActionsManager.actionCounter++;
                 hasBoughtShoot = true;
-
+                displayShrinkMessage = true;
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
+
+
 
 
             }
@@ -249,7 +282,7 @@ public class PurchaseActions : MonoBehaviour
         }
     }
 
-
+       
     
 }
 

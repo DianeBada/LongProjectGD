@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
     public static bool isReloadingScene = false;
     public static float deathTimes = 0;
 
+    bool hasShrunk = false;
+
 
     void Start()
     {
@@ -97,23 +99,38 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
 
-        #region Caleb's stuff (Death animation):
+        //#region Caleb's stuff (Death animation):
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            deathTimes += 1;
-            anim.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
+        //if (Input.GetKeyDown(KeyCode.Backspace))
+        //{
+        //    deathTimes += 1;
+        //    anim.SetTrigger("player Is Dead"); //Trigger prevents other animations from playing
 
-            StartCoroutine(ReloadScene());
-        }
+        //    StartCoroutine(ReloadScene());
+        //}
 
-        #endregion
+        
 
         //Flip player when moving left-right
         if (horizontalInput > 0.01f)
             transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
         else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(-0.7f, 0.7f, 0.7f);
+
+
+        if (horizontalInput > 0.01f && hasShrunk == true)
+                {
+
+            body.transform.localScale = new Vector2(0.3f, 0.3f);
+
+
+        }
+
+        else if(horizontalInput < -0.01f && hasShrunk == true)
+            {
+            body.transform.localScale = new Vector2(0.3f, 0.3f);
+
+        }
 
         //Set animator parameters
         //anim.SetBool("run", horizontalInput != 0);
@@ -145,12 +162,32 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 0;
             body.velocity = Vector2.zero;
         }
+        if (Input.GetKeyDown(KeyCode.E) && PurchaseActions.shrinking==true)
+        {
+            Debug.Log("is shrinking");
+            if (hasShrunk == false)
+            {
+                body.transform.localScale = new Vector2(0.3f, 0.3f);
+                hasShrunk = true;
+
+            }
+            else if (hasShrunk == true)
+            {
+                Debug.Log("is not shrinking");
+
+                body.transform.localScale = new Vector2(0.7f, 0.7f);
+                hasShrunk = false;
+            }
+
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && ActionsManager.hasDashing == true)
         {
             Debug.Log("Dashing");
             StartCoroutine(Dash());
         }
+
+      
 
         else
         {

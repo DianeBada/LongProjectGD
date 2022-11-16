@@ -131,7 +131,7 @@ public class PlayerHealth : MonoBehaviour
         {
         if (isTempDead == true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.2f);
            player.transform.position = startPos.transform.position;
             //mainCam.transform.position = camStart.transform.position;
             yield return new WaitForSeconds(.5f);
