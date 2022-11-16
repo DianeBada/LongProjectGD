@@ -19,9 +19,10 @@ public class PurchaseActions : MonoBehaviour
     public bool dashing = false;
     public bool walking = false;
     public static bool jumping = false;
-    public bool shooting = false;
+    public static bool shooting = false;
     public static bool climbing = false;
     public static bool shrinking = false;
+
     public bool hasBoughtWalk = false;
     public bool hasBoughtJump = false;
     public bool hasBoughtShoot = false;
