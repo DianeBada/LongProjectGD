@@ -54,7 +54,7 @@ public class PurchaseActions : MonoBehaviour
     public static bool displayShrinkMessage = false;
     public static bool displayShootMessage = false;
 
-
+    
 
     // public TextMeshProUGUI shoottext;
 
