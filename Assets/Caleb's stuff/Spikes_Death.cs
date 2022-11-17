@@ -23,7 +23,7 @@ public class Spikes_Death : MonoBehaviour
             }
             else
             {
-                //Game Over : Game Over Scene
+                SceneManager.LoadScene("Game Over");
             }
         }
         //}

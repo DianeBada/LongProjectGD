@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     public Slider slider;
@@ -72,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log("Game Over");
             //playerDead();
 
-            // Game Over Scene
+            SceneManager.LoadScene("Game Over");
         }
 
 
@@ -140,7 +140,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isTempDead == true)
         {
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(.1f);
             player.transform.position = startPos.transform.position;
             //mainCam.transform.position = camStart.transform.position;
             yield return new WaitForSeconds(.5f);

@@ -74,7 +74,7 @@ public class LevelChanger : MonoBehaviour
 
             else if (sceneName == "TheFourthLevel 1")
             {
-                SceneManager.LoadScene("GameOverScene");
+                SceneManager.LoadScene("Game Over");
 
             }
         }
