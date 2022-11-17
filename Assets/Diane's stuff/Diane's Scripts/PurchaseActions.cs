@@ -47,14 +47,14 @@ public class PurchaseActions : MonoBehaviour
     public static GameObject jumpIcon;
     public static GameObject shrinkIcon;
     public static GameObject shootIcon;
-    public int currPurch;
 
 
 
     public static bool displayShrinkMessage = false;
     public static bool displayShootMessage = false;
 
-    
+    public static int moneyCount = 15;
+
 
     // public TextMeshProUGUI shoottext;
 
@@ -65,13 +65,15 @@ public class PurchaseActions : MonoBehaviour
     ActionsManager actionsManager;
     GameObject playerMove;
     Reset resetScript;
+    int money = moneyCount;
     void Awake()
     {
 
 
 
+        actionsManager = GetComponent<ActionsManager>();
 
-       
+
 
 
 
@@ -93,33 +95,34 @@ public class PurchaseActions : MonoBehaviour
         shootIcon.SetActive(false);
 
 
-        currPurch = ActionsManager.moneyCount;
-        
 
 
 
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        currency.text = "currency: " + currPurch.ToString();
+        currency.text = "currency: " + moneyCount.ToString();
         dashtext.text = "Dash - " + dashingCost.ToString();
         jumptext.text = "2x Jump - " + jumpingCost.ToString();
         climbtext.text = "Climb - " + climbingCost.ToString();
         shrinktext.text = "Shrink - " + shrinkCost.ToString();
         shoottext.text = "Shoot - " + shootingCost.ToString();
-        actionsManager = GetComponent<ActionsManager>();
-        playerMove = GameObject.Find("player_");
+        playerMove = GameObject.Find("player");
 
+    }
+
+   
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+      Debug.Log(  moneyCount);
 
-        currency.text = "currency: " + currPurch.ToString();
+        currency.text = "currency: " + moneyCount.ToString();
 
 
         if (hasBoughtWalk == true)
@@ -162,9 +165,9 @@ public class PurchaseActions : MonoBehaviour
             Debug.Log("is purchasing");
 
 
-            if (currPurch > walkingCost)
+            if (moneyCount > walkingCost)
             {
-                currPurch -= walkingCost;
+                moneyCount -= walkingCost;
                 hasBoughtWalk = true;
                 actionsManager.hasWalking = true;
                 walking = true;
@@ -185,11 +188,12 @@ public class PurchaseActions : MonoBehaviour
             Debug.Log("is purchasing");
 
 
-            if (currPurch > dashingCost)
+            if (moneyCount > dashingCost)
             {
-                hasBoughtDash = true;
 
-                currPurch -= dashingCost;
+
+                moneyCount -= dashingCost;
+                hasBoughtDash = true;
                 actionsManager.hasDashing = true;
                 dashing = true;
                 ActionsManager.actionCounter++;
@@ -207,13 +211,14 @@ public class PurchaseActions : MonoBehaviour
         if (canPurchase && !hasBoughtJump)
         {
 
-            if (currPurch > jumpingCost)
+            if (moneyCount > jumpingCost)
             {
-                currPurch -= jumpingCost;
+                moneyCount -= jumpingCost;
                 hasBoughtJump = true;
                 actionsManager.hasJumping = true;
                 jumping = true;
-                playerMove. GetComponent<PlayerMovement>().extraJumps = 1;
+                
+                playerMove. GetComponent<PlayerMovement>().extraJumps += 1;
                 ActionsManager.actionCounter++;
 
                 //Item Selection Animation
@@ -228,9 +233,9 @@ public class PurchaseActions : MonoBehaviour
     {
         if (canPurchase && !hasBoughtClimb)
         {
-            if (currPurch > climbingCost)
+            if (moneyCount > climbingCost)
             {
-                currPurch -= climbingCost;
+                moneyCount -= climbingCost;
                 hasBoughtClimb = true;
                 actionsManager.hasClimbing = true;
                 climbing = true;
@@ -249,9 +254,9 @@ public class PurchaseActions : MonoBehaviour
     {
         if (canPurchase && !hasBoughtShrink)
         {
-            if (currPurch > shrinkCost)
+            if (moneyCount > shrinkCost)
             {
-                currPurch -= shrinkCost;
+                moneyCount -= shrinkCost;
                 hasBoughtShrink = true;
                 actionsManager.hasShrinking = true;
                 shrinking = true;
@@ -268,9 +273,9 @@ public class PurchaseActions : MonoBehaviour
         if (canPurchase && !hasBoughtShoot)
         {
 
-            if (currPurch > shootingCost)
+            if (moneyCount > shootingCost)
             {
-                currPurch -= shootingCost;
+                moneyCount -= shootingCost;
                 actionsManager.hasShooting = true;
                 shooting = true;
                 ActionsManager.actionCounter++;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActionsManager : MonoBehaviour
 {
 
-    public static int moneyCount = 15;
+    //public int currency = moneyCount;
     public  bool hasDashing = false;
     public  bool hasWalking = false;
     public  bool hasJumping = false;
@@ -69,7 +69,6 @@ public class ActionsManager : MonoBehaviour
 
     void Awake()
     {
-
 
     }
 }

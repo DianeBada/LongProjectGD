@@ -25,9 +25,9 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-          //  myAudio.PlayOneShot(coinSound);
+            //  myAudio.PlayOneShot(coinSound);
 
-            purch.currPurch += 2;
+            PurchaseActions.moneyCount += 2;
 
             this.gameObject.SetActive(false);
         }

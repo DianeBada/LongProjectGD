@@ -68,7 +68,13 @@ public class LevelChanger : MonoBehaviour
             }
            else if (sceneName == "Level_Three")
             {
-                SceneManager.LoadScene("Level_Four");
+                SceneManager.LoadScene("TheFourthLevel 1");
+
+            }
+
+            else if (sceneName == "TheFourthLevel 1")
+            {
+                SceneManager.LoadScene("GameOverScene");
 
             }
         }
@@ -78,6 +84,7 @@ public class LevelChanger : MonoBehaviour
     {
         if (scene.name == "Level_Two")
         {
+            
             GManager = GameObject.Find("Game Manager");
             Player = GameObject.Find("player");
             changeLevel = true;
@@ -86,6 +93,42 @@ public class LevelChanger : MonoBehaviour
             //GManager.GetComponent<PurchaseActions>().hasBoughtClimb = false;
             //GManager.GetComponent<PurchaseActions>().hasBoughtShoot = false;
             //GManager.GetComponent<PurchaseActions>().hasBoughtShrink = false;
+            GManager.GetComponent<PurchaseActions>().hasBoughtJump = false;
+            Player.GetComponent<PlayerMovement>().extraJumps = 0;
+
+            GManager.GetComponent<PurchaseActions>().hasBoughtDash = false;
+
+
+        }
+        if (scene.name == "Level_Three")
+        {
+
+            GManager = GameObject.Find("Game Manager");
+            Player = GameObject.Find("player");
+            changeLevel = true;
+            GManager.GetComponent<PurchaseActions>().hasBoughtClimb = false;
+
+            //GManager.GetComponent<PurchaseActions>().hasBoughtClimb = false;
+            GManager.GetComponent<PurchaseActions>().hasBoughtShoot = false;
+            GManager.GetComponent<PurchaseActions>().hasBoughtShrink = false;
+            GManager.GetComponent<PurchaseActions>().hasBoughtJump = false;
+            Player.GetComponent<PlayerMovement>().extraJumps = 0;
+
+            GManager.GetComponent<PurchaseActions>().hasBoughtDash = false;
+
+
+        }
+        if (scene.name == "TheFourthLevel 1")
+        {
+
+            GManager = GameObject.Find("Game Manager");
+            Player = GameObject.Find("player");
+            changeLevel = true;
+            GManager.GetComponent<PurchaseActions>().hasBoughtClimb = false;
+
+            //GManager.GetComponent<PurchaseActions>().hasBoughtClimb = false;
+            GManager.GetComponent<PurchaseActions>().hasBoughtShoot = false;
+            GManager.GetComponent<PurchaseActions>().hasBoughtShrink = false;
             GManager.GetComponent<PurchaseActions>().hasBoughtJump = false;
             Player.GetComponent<PlayerMovement>().extraJumps = 0;
 
