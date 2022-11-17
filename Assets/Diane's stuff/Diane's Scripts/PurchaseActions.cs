@@ -7,21 +7,21 @@ using UnityEngine.SceneManagement;
 public class PurchaseActions : MonoBehaviour
 {
 
-    private int dashingCost = 6;
-    private int walkingCost = 6;
-    private int jumpingCost = 6;
-    private int climbingCost = 6;
-    private int shootingCost = 8;
-    private int shrinkCost = 6;
+    public int dashingCost = 6;
+    public int walkingCost = 6;
+    public int jumpingCost = 6;
+    public int climbingCost = 6;
+    public int shootingCost = 8;
+    public int shrinkCost = 6;
 
 
 
-    public static bool dashing = false;
+    public bool dashing = false;
     public bool walking = false;
-    public static bool jumping = false;
-    public static bool shooting = false;
-    public static bool climbing = false;
-    public static bool shrinking = false;
+    public  bool jumping = false;
+    public  bool shooting = false;
+    public  bool climbing = false;
+    public  bool shrinking = false;
 
     public bool hasBoughtWalk = false;
     public bool hasBoughtJump = false;
@@ -47,7 +47,7 @@ public class PurchaseActions : MonoBehaviour
     public static GameObject jumpIcon;
     public static GameObject shrinkIcon;
     public static GameObject shootIcon;
-
+    public int currPurch;
 
 
 
@@ -63,6 +63,7 @@ public class PurchaseActions : MonoBehaviour
     #endregion
 
     ActionsManager actionsManager;
+    GameObject playerMove;
     Reset resetScript;
     void Awake()
     {
@@ -70,13 +71,7 @@ public class PurchaseActions : MonoBehaviour
 
 
 
-        currency.text = "currency: " + ActionsManager.moneyCount.ToString();
-        dashtext.text = "Dash - " + dashingCost.ToString();
-        jumptext.text = "2x Jump - " + jumpingCost.ToString();
-        climbtext.text = "Climb - " + climbingCost.ToString();
-        shrinktext.text = "Shrink - " + shrinkCost.ToString();
-        shoottext.text = "Shoot - " + shootingCost.ToString();
-        actionsManager = GetComponent<ActionsManager>();
+       
 
 
 
@@ -98,7 +93,7 @@ public class PurchaseActions : MonoBehaviour
         shootIcon.SetActive(false);
 
 
-
+        currPurch = ActionsManager.moneyCount;
         
 
 
@@ -109,14 +104,22 @@ public class PurchaseActions : MonoBehaviour
     void Start()
     {
 
-       
+        currency.text = "currency: " + currPurch.ToString();
+        dashtext.text = "Dash - " + dashingCost.ToString();
+        jumptext.text = "2x Jump - " + jumpingCost.ToString();
+        climbtext.text = "Climb - " + climbingCost.ToString();
+        shrinktext.text = "Shrink - " + shrinkCost.ToString();
+        shoottext.text = "Shoot - " + shootingCost.ToString();
+        actionsManager = GetComponent<ActionsManager>();
+        playerMove = GameObject.Find("player_");
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        currency.text = "currency: " + ActionsManager.moneyCount.ToString();
+        currency.text = "currency: " + currPurch.ToString();
 
 
         if (hasBoughtWalk == true)
@@ -159,13 +162,13 @@ public class PurchaseActions : MonoBehaviour
             Debug.Log("is purchasing");
 
 
-            if (ActionsManager.moneyCount > walkingCost)
+            if (currPurch > walkingCost)
             {
-                ActionsManager.moneyCount -= walkingCost;
+                currPurch -= walkingCost;
+                hasBoughtWalk = true;
                 actionsManager.hasWalking = true;
                 walking = true;
                 ActionsManager.actionCounter++;
-                hasBoughtWalk = true;
 
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
@@ -182,13 +185,14 @@ public class PurchaseActions : MonoBehaviour
             Debug.Log("is purchasing");
 
 
-            if (ActionsManager.moneyCount > dashingCost)
+            if (currPurch > dashingCost)
             {
-                ActionsManager.moneyCount -= dashingCost;
+                hasBoughtDash = true;
+
+                currPurch -= dashingCost;
                 actionsManager.hasDashing = true;
                 dashing = true;
                 ActionsManager.actionCounter++;
-                hasBoughtDash = true;
 
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
@@ -203,14 +207,14 @@ public class PurchaseActions : MonoBehaviour
         if (canPurchase && !hasBoughtJump)
         {
 
-            if (ActionsManager.moneyCount > jumpingCost)
+            if (currPurch > jumpingCost)
             {
-                ActionsManager.moneyCount -= jumpingCost;
+                currPurch -= jumpingCost;
+                hasBoughtJump = true;
                 actionsManager.hasJumping = true;
                 jumping = true;
-                PlayerMovement.extraJumps = 1;
+                playerMove. GetComponent<PlayerMovement>().extraJumps = 1;
                 ActionsManager.actionCounter++;
-                hasBoughtJump = true;
 
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
@@ -224,14 +228,14 @@ public class PurchaseActions : MonoBehaviour
     {
         if (canPurchase && !hasBoughtClimb)
         {
-            if (ActionsManager.moneyCount > climbingCost)
+            if (currPurch > climbingCost)
             {
-                ActionsManager.moneyCount -= climbingCost;
+                currPurch -= climbingCost;
+                hasBoughtClimb = true;
                 actionsManager.hasClimbing = true;
                 climbing = true;
                 ActionsManager.actionCounter++;
                 actionsManager.hasClimbing = true;
-                hasBoughtClimb = true;
 
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
@@ -245,13 +249,12 @@ public class PurchaseActions : MonoBehaviour
     {
         if (canPurchase && !hasBoughtShrink)
         {
-            if (ActionsManager.moneyCount > shrinkCost)
+            if (currPurch > shrinkCost)
             {
-                ActionsManager.moneyCount -= shrinkCost;
+                currPurch -= shrinkCost;
+                hasBoughtShrink = true;
                 actionsManager.hasShrinking = true;
                 shrinking = true;
-                actionsManager.hasShrinking = true;
-                hasBoughtShrink = true;
                 displayShrinkMessage = true;
                 playerAnimator.SetTrigger("itemWasBought");
 
@@ -265,13 +268,12 @@ public class PurchaseActions : MonoBehaviour
         if (canPurchase && !hasBoughtShoot)
         {
 
-            if (ActionsManager.moneyCount > shootingCost)
+            if (currPurch > shootingCost)
             {
-                ActionsManager.moneyCount -= shootingCost;
+                currPurch -= shootingCost;
                 actionsManager.hasShooting = true;
                 shooting = true;
                 ActionsManager.actionCounter++;
-                hasBoughtShoot = true;
                 displayShootMessage = true;
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
@@ -287,48 +289,62 @@ public class PurchaseActions : MonoBehaviour
 
     }
 
-       public void ResetLevel()
-    {
-       if( hasBoughtShoot == true)
-        {
-            hasBoughtShoot = false;
-            actionsManager.hasShooting = false;
-            shooting = false;
-        }
+    //   public void ResetLevel()
+    //{
+    //    if(resetScript.unDoReset == false)
+    //    {
+    //        if (hasBoughtShoot == true)
+    //        {
+    //            hasBoughtShoot = false;
+    //            actionsManager.hasShooting = false;
+    //            shooting = false;
+    //        }
 
-       if(hasBoughtShrink == true)
-        {
-            hasBoughtShrink = false;
-            actionsManager.hasShrinking = false;
-            shrinking = false;
-        }
+    //        else if (hasBoughtShrink == true)
+    //        {
+    //            hasBoughtShrink = false;
+    //            actionsManager.hasShrinking = false;
+    //            shrinking = false;
+    //        }
 
-       if(hasBoughtDash == true)
-        {
-            hasBoughtDash = false;
-            actionsManager.hasClimbing = false ;
-            dashing = false;
-        }
+    //        else if (hasBoughtDash == true)
+    //        {
+    //            hasBoughtDash = false;
+    //            actionsManager.hasClimbing = false;
+    //            dashing = false;
+    //        }
 
-       if(hasBoughtJump == true)
-        {
-            hasBoughtJump = false;
-            actionsManager.hasJumping = false;
-            PlayerMovement.extraJumps = 0;
+    //        else if (hasBoughtJump == true)
+    //        {
+    //            hasBoughtJump = false;
+    //            actionsManager.hasJumping = false;
+    //            PlayerMovement.extraJumps = 0;
+    //            Debug.Log("no jumps for you");
+    //            jumping = false;
+    //        }
 
-            jumping = false;
-        }
+    //        else if (hasBoughtClimb == true)
+    //        {
+    //            hasBoughtClimb = false;
+    //            actionsManager.hasClimbing = false;
+    //            climbing = false;
+    //        }
 
-       if(hasBoughtClimb == true)
-        {
-            hasBoughtClimb =false;
-            actionsManager.hasClimbing = false;
-            climbing = false;
-        }
-    }
+
+    //    }
+
+       
+         
+
+    //    }
+
+ 
 
 }
 
 
-    
+
+
+
+
 

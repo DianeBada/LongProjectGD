@@ -7,6 +7,7 @@ public class Reset : MonoBehaviour
 {
     public bool resetLevel;
     public GameObject gManager;
+    public bool unDoReset;
 
     PurchaseActions purch;
     // Start is called before the first frame update
@@ -25,7 +26,9 @@ public class Reset : MonoBehaviour
         {
             Debug.Log("Is Colliding with player; reset level");
             resetLevel = true;
-            gManager.GetComponent<PurchaseActions>().ResetLevel();
+          //  gManager.GetComponent<PurchaseActions>().ResetLevel();
+            Debug.Log("Resetting level with function");
+
 
         }
     }

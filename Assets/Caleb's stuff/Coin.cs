@@ -6,10 +6,14 @@ public class Coin : MonoBehaviour
 {
     public AudioClip coinSound;
     private AudioSource myAudio;
+    ActionsManager actionsManager;
+    PurchaseActions purch;
 
    void Start()
     {
         myAudio = GetComponent < AudioSource >() ;
+        actionsManager = GetComponent<ActionsManager>();
+        purch = GetComponent<PurchaseActions>();
     }
     void Update()
     {
@@ -23,7 +27,7 @@ public class Coin : MonoBehaviour
         {
           //  myAudio.PlayOneShot(coinSound);
 
-            ActionsManager.moneyCount += 1;
+            purch.currPurch += 2;
 
             this.gameObject.SetActive(false);
         }

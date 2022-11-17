@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteCounter; //How much time passed since the player ran off the edge
 
     [Header("Multiple Jumps")]
-    [SerializeField] public static int extraJumps;
+    [SerializeField] public int extraJumps;
     private int jumpCounter;
 
     [Header("Wall Jumping")]
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     LevelChanger levelChanger;
     Reset resetScene;
 
-
+    PurchaseActions purchase;
     void Start()
     {
         this.platform = null;
@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         actionsManager = GetComponent<ActionsManager>();
         levelChanger = GetComponent<LevelChanger>();
         resetScene = GetComponent<Reset>();
+        purchase = GetComponent<PurchaseActions>();
     }
   
 
@@ -142,6 +143,29 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && purchase.hasBoughtShrink)
+        {
+            Debug.Log("is shrinking");
+            if (hasShrunk == false)
+            {
+                body.transform.localScale = new Vector2(0.3f, 0.3f);
+                hasShrunk = true;
+
+            }
+            else if (hasShrunk == true)
+            {
+                Debug.Log("is not shrinking");
+
+                body.transform.localScale = new Vector2(0.7f, 0.7f);
+                hasShrunk = false;
+            }
+
+        }
+        else
+        {
+            Debug.Log("cant buy");
+        }
+
         //Set animator parameters
         //anim.SetBool("run", horizontalInput != 0);
         //anim.SetBool("grounded", isGrounded());
@@ -167,41 +191,21 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && body.velocity.y > 0 )
             body.velocity = new Vector2(body.velocity.x, body.velocity.y / 2);
 
-        if (onWall())
-        {
-            body.gravityScale = 0;
-            body.velocity = Vector2.zero;
-        }
-        if (Input.GetKeyDown(KeyCode.E) && actionsManager.hasShrinking)
-        {
-            Debug.Log("is shrinking");
-            if (hasShrunk == false)
-            {
-                body.transform.localScale = new Vector2(0.3f, 0.3f);
-                hasShrunk = true;
 
-            }
-            else if (hasShrunk == true)
-            {
-                Debug.Log("is not shrinking");
-
-                body.transform.localScale = new Vector2(0.7f, 0.7f);
-                hasShrunk = false;
-            }
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash &&actionsManager.hasDashing == true)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && purchase.hasBoughtDash)
         {
             Debug.Log("Dashing");
             StartCoroutine(Dash());
         }
         else
         {
-            Debug.Log("sorry not available to you");
+            Debug.Log("canot dash");
         }
-
-      
+        if (onWall())
+        {
+            body.gravityScale = 0;
+            body.velocity = Vector2.zero;
+        }
 
         else
         {
@@ -253,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
 
        // SoundManager.instance.PlaySound(jumpSound);
 
-        if (onWall() && PurchaseActions.climbing == true)
+        if (onWall() && purchase.climbing == true)
         {
             
             
