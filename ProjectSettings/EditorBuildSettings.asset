@@ -20,7 +20,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_Three.unity
     guid: 56ff98325af41f24aaf67e894b2f159d
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/TheFourthLevel.unity
-    guid: 27d701da13a741f4eb08b2acf9ae3427
+    path: Assets/Scenes/1. Start Screen.unity
+    guid: b8c5379fa25e4e04b92a020e8e71e99a
+  - enabled: 1
+    path: Assets/Scenes/2. Game Over.unity
+    guid: 102d8ee56f8ded7449d6efa67fcbf844
+  - enabled: 1
+    path: Assets/Scenes/3. Main Menu.unity
+    guid: 6af56a575a9dd2a45a5e4fdb8295c468
   m_configObjects: {}
