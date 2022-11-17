@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     private float cooldownTimer = Mathf.Infinity;
 
     ActionsManager actionsManager;
+    PurchaseActions purchase;
     private void Awake()
     {
         //anim = GetComponent<Animator>();
@@ -21,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && cooldownTimer > attackCooldown && playerMovement.canAttack() && actionsManager.hasShooting == true && PurchaseActions.shooting == true)
+        if (Input.GetKeyDown(KeyCode.F) && cooldownTimer > attackCooldown && playerMovement.canAttack() && purchase.hasBoughtShoot && purchase.shooting == true)
             Attack();
 
         cooldownTimer += Time.deltaTime;

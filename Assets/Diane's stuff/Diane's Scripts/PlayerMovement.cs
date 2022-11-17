@@ -7,20 +7,20 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Parameters")]
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpPower;
+    [SerializeField] private float speed = 10;
+    [SerializeField] private float jumpPower =25;
 
     [Header("Coyote Time")]
-    [SerializeField] private float coyoteTime; //How much time the player can hang in the air before jumping
+    [SerializeField] private float coyoteTime =0; //How much time the player can hang in the air before jumping
     private float coyoteCounter; //How much time passed since the player ran off the edge
 
     [Header("Multiple Jumps")]
-    [SerializeField] public static int extraJumps;
+    [SerializeField] public int extraJumps;
     private int jumpCounter;
 
     [Header("Wall Jumping")]
-    [SerializeField] private float wallJumpX; //Horizontal wall jump force
-    [SerializeField] private float wallJumpY; //Vertical wall jump force
+    [SerializeField] private float wallJumpX = 1000; //Horizontal wall jump force
+    [SerializeField] private float wallJumpY = 750; //Vertical wall jump force
 
     [Header("Layers")]
     [SerializeField] private LayerMask groundLayer;
@@ -60,12 +60,15 @@ public class PlayerMovement : MonoBehaviour
 
     public ActionsManager actionsManager;
 
+    LevelChanger levelChanger;
+    Reset resetScene;
 
+    PurchaseActions purchase;
     void Start()
     {
         this.platform = null;
     }
-    private void Awake()
+     void Awake()
     {
         #region CAleb's stuff:
 
@@ -79,12 +82,15 @@ public class PlayerMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
 
         actionsManager = GetComponent<ActionsManager>();
+        levelChanger = GetComponent<LevelChanger>();
+        resetScene = GetComponent<Reset>();
+        purchase = GetComponent<PurchaseActions>();
     }
   
 
-    private void Update()
+   public void Update()
     {
-
+        
         if(isDashing == true)
         {
             return;
@@ -137,6 +143,29 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && purchase.hasBoughtShrink)
+        {
+            Debug.Log("is shrinking");
+            if (hasShrunk == false)
+            {
+                body.transform.localScale = new Vector2(0.3f, 0.3f);
+                hasShrunk = true;
+
+            }
+            else if (hasShrunk == true)
+            {
+                Debug.Log("is not shrinking");
+
+                body.transform.localScale = new Vector2(0.7f, 0.7f);
+                hasShrunk = false;
+            }
+
+        }
+        else
+        {
+            Debug.Log("cant buy");
+        }
+
         //Set animator parameters
         //anim.SetBool("run", horizontalInput != 0);
         //anim.SetBool("grounded", isGrounded());
@@ -162,37 +191,21 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && body.velocity.y > 0 )
             body.velocity = new Vector2(body.velocity.x, body.velocity.y / 2);
 
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && purchase.hasBoughtDash)
+        {
+            Debug.Log("Dashing");
+            StartCoroutine(Dash());
+        }
+        else
+        {
+            Debug.Log("canot dash");
+        }
         if (onWall())
         {
             body.gravityScale = 0;
             body.velocity = Vector2.zero;
         }
-        if (Input.GetKeyDown(KeyCode.E) && actionsManager.hasShrinking)
-        {
-            Debug.Log("is shrinking");
-            if (hasShrunk == false)
-            {
-                body.transform.localScale = new Vector2(0.3f, 0.3f);
-                hasShrunk = true;
-
-            }
-            else if (hasShrunk == true)
-            {
-                Debug.Log("is not shrinking");
-
-                body.transform.localScale = new Vector2(0.7f, 0.7f);
-                hasShrunk = false;
-            }
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash &&actionsManager.hasDashing == true)
-        {
-            Debug.Log("Dashing");
-            StartCoroutine(Dash());
-        }
-
-      
 
         else
         {
@@ -244,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
 
        // SoundManager.instance.PlaySound(jumpSound);
 
-        if (onWall() && PurchaseActions.climbing == true)
+        if (onWall() && purchase.climbing == true)
         {
             
             

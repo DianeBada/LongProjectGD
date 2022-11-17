@@ -29,6 +29,8 @@ public class TutorialLevelScript : MonoBehaviour
     public GameObject startPos;
 
     ActionsManager actionsManager;
+    PurchaseActions purch;
+    PlayerMovement playerMove;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,8 @@ public class TutorialLevelScript : MonoBehaviour
         SpikesPanel.SetActive(false);
 
         actionsManager = GetComponent<ActionsManager>();
+        purch = GetComponent<PurchaseActions>();
+        playerMove = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -65,15 +69,15 @@ public class TutorialLevelScript : MonoBehaviour
         {
             collBanana = true;
 
-            PurchaseActions.climbing = true;
+            purch.climbing = true;
         }
 
         if (collision.gameObject.CompareTag("cherry-doubleJump"))
         {
             colCherry = true;
             actionsManager.hasJumping = true;
-            PurchaseActions.jumping = true;
-            PlayerMovement.extraJumps = 1;
+            purch.jumping = true;
+            playerMove.extraJumps = 1;
         }
         if (collision.gameObject.CompareTag("apricot-dash"))
         {
