@@ -21,7 +21,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            myAudio.PlayOneShot(coinSound);
+          //  myAudio.PlayOneShot(coinSound);
 
             ActionsManager.moneyCount += 1;
 

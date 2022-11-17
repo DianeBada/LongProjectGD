@@ -16,7 +16,7 @@ public class PurchaseActions : MonoBehaviour
 
 
 
-    public bool dashing = false;
+    public static bool dashing = false;
     public bool walking = false;
     public static bool jumping = false;
     public static bool shooting = false;
@@ -74,7 +74,7 @@ public class PurchaseActions : MonoBehaviour
         jumptext.text = "2x Jump - " + jumpingCost.ToString();
         climbtext.text = "Climb - " + climbingCost.ToString();
         shrinktext.text = "Shrink - " + shrinkCost.ToString();
-        shoottext.text = "Climb - " + shootingCost.ToString();
+        shoottext.text = "Shoot - " + shootingCost.ToString();
 
 
 
@@ -269,7 +269,7 @@ public class PurchaseActions : MonoBehaviour
                 shooting = true;
                 ActionsManager.actionCounter++;
                 hasBoughtShoot = true;
-                displayShrinkMessage = true;
+                displayShootMessage = true;
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
 

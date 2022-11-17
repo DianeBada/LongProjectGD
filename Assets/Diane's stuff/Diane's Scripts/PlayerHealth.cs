@@ -12,18 +12,27 @@ public class PlayerHealth : MonoBehaviour
     public static int playerLives = 2;
     public GameObject startPos;
     public GameObject player;
-   public static bool isTempDead;
+    public static bool isTempDead;
     public static bool isDead;
     public TextMeshProUGUI livesText;
     public GameObject camStart;
     public Camera mainCam;
     public Animator playerAnimator;
 
+    [SerializeField] private float iFramesDuration;
+    [SerializeField] private int numberOfFlashes;
+    private SpriteRenderer spriteRend;
+
+    [Header("Components")]
+    [SerializeField] private Behaviour[] components;
+    private bool invulnerable;
 
 
     // Start is called before the first frame update
     public void Start()
     {
+        spriteRend = GetComponent<SpriteRenderer>();
+
         livesText.text = "x" + playerLives.ToString();
 
         playerHealth = slider.maxValue;
@@ -32,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if(StoreDeHellContent.isOpen == true)
+        if (StoreDeHellContent.isOpen == true)
         {
             slider.gameObject.SetActive(false);
         }
@@ -72,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
     {
         playerHealth -= deductHealth;
         SetHealth(playerHealth);
-      
+
     }
 
     void playerDead()
@@ -82,9 +91,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "enemies")
+        if (collision.gameObject.tag == "Enemy")
         {
-
+           // StartCoroutine(Invunerability());
             DeductHealth(15);
             Debug.Log(playerHealth);
 
@@ -92,15 +101,15 @@ public class PlayerHealth : MonoBehaviour
 
         else if (collision.gameObject.tag == "spikes")
         {
-           
+            //StartCoroutine(Invunerability());
             DeductHealth(100);
-            playerLives-=1;
+            playerLives -= 1;
 
 
 
         }
 
-        if (collision.gameObject.tag == "hearts") 
+        if (collision.gameObject.tag == "hearts")
         {
             playerLives = +1;
         }
@@ -127,18 +136,35 @@ public class PlayerHealth : MonoBehaviour
 
     //    }
 
-        IEnumerator LevelRestart()
-        {
+    IEnumerator LevelRestart()
+    {
         if (isTempDead == true)
         {
             yield return new WaitForSeconds(.2f);
-           player.transform.position = startPos.transform.position;
+            player.transform.position = startPos.transform.position;
             //mainCam.transform.position = camStart.transform.position;
             yield return new WaitForSeconds(.5f);
             playerHealth = 100;
 
         }
-}
+
+
+    }
+
+    //IEnumerator Invunerability()
+    //{
+    //    invulnerable = true;
+    //    Physics2D.IgnoreLayerCollision(8, 9, true);
+    //    for (int i = 0; i < numberOfFlashes; i++)
+    //    {
+    //        spriteRend.color = new Color(1, 0, 0, 0.5f);
+    //        yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+    //        spriteRend.color = Color.white;
+    //        yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+    //    }
+    //    Physics2D.IgnoreLayerCollision(10, 11, false);
+    //    invulnerable = false;
+    //}
 }
 
 

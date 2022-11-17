@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CamPreview : MonoBehaviour
 {
-    public static bool isDonePreview;
+    public static bool isDonePreview = false;
+    public static bool isStart = false;
+
 
     [SerializeField]
     public float panningTime = 6f;
@@ -20,6 +22,7 @@ public class CamPreview : MonoBehaviour
             mainCam.SetActive(false);
             StartCoroutine(Preview());
             isDonePreview = true;
+            isStart = true;
         }
         else if (PlayerMovement.deathTimes>=1)
         {

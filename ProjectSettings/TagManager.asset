@@ -9,6 +9,26 @@ TagManager:
   - StoreItemTickets
   - storeCanvas
   - Enemy
+  - jumpTrigger
+  - apricot-dash
+  - cherry-doubleJump
+  - bannana-climb
+  - screen
+  - dashIcon
+  - climbIcon
+  - jumpIcon
+  - spikes
+  - exitTrigger
+  - spikesTrigger
+  - enterTrigger
+  - coins
+  - portal
+  - lives
+  - heart
+  - shrinkIcon
+  - shootIcon
+  - Checkpoint
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -18,8 +38,8 @@ TagManager:
   - UI
   - ground
   - wall
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 

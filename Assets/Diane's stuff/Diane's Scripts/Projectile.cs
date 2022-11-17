@@ -22,17 +22,18 @@ public class Projectile : MonoBehaviour
         transform.Translate(movementSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
-        if (lifetime > 5) gameObject.SetActive(false);
+        if (lifetime > 2f) gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
         boxCollider.enabled = false;
-        anim.SetTrigger("explode");
+       // anim.SetTrigger("explode");
 
-        //if (collision.tag == "Enemy")
-        //    collision.GetComponent<Health>()?.TakeDamage(1);
+        if (collision.tag == "Enemy")
+            // collision.GetComponent<Health>()?.TakeDamage(1);
+            Debug.Log("hitEnemy");
     }
     public void SetDirection(float _direction)
     {
