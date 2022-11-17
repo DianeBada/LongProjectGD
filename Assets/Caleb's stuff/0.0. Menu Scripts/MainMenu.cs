@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
 {
     public AudioSource startAudio;
     public AudioSource quitAudio;
+    public AudioSource creditAudio;
+    public AudioSource mainMenuAudio;
 
     //BUTTONS
     public void StartButton()
@@ -33,6 +35,17 @@ public class MainMenu : MonoBehaviour
     public void Credits()
     {
         //Audio
-        startAudio.Play();
+        creditAudio.Play();
+
+        print("Credit Audio played");
+    }
+
+    public void TheMainMenu()
+    {
+        //Audio
+        mainMenuAudio.Play();
+
+        //Change to Tutorial scene
+        SceneManager.LoadScene("3. Main Menu");
     }
 }
