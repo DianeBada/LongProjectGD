@@ -46106,7 +46106,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeadingGameobject: {fileID: 1010932609}
   PromptGameobject: {fileID: 194797831}
-  headingAudio: {fileID: 1010932613}
   promptAudio: {fileID: 194797833}
 --- !u!1 &1629085039
 GameObject:
