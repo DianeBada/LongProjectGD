@@ -63,6 +63,7 @@ public class PurchaseActions : MonoBehaviour
     #endregion
 
     ActionsManager actionsManager;
+    Reset resetScript;
     void Awake()
     {
 
@@ -98,7 +99,7 @@ public class PurchaseActions : MonoBehaviour
 
 
 
-
+        
 
 
 
@@ -108,12 +109,12 @@ public class PurchaseActions : MonoBehaviour
     void Start()
     {
 
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-
 
         currency.text = "currency: " + ActionsManager.moneyCount.ToString();
 
@@ -147,6 +148,7 @@ public class PurchaseActions : MonoBehaviour
             shrinkIcon.SetActive(true);
         }
 
+       
     }
 
 
@@ -228,7 +230,7 @@ public class PurchaseActions : MonoBehaviour
                 actionsManager.hasClimbing = true;
                 climbing = true;
                 ActionsManager.actionCounter++;
-                actionsManager.hasClimbing = false;
+                actionsManager.hasClimbing = true;
                 hasBoughtClimb = true;
 
                 //Item Selection Animation
@@ -248,7 +250,7 @@ public class PurchaseActions : MonoBehaviour
                 ActionsManager.moneyCount -= shrinkCost;
                 actionsManager.hasShrinking = true;
                 shrinking = true;
-                actionsManager.hasShrinking = false;
+                actionsManager.hasShrinking = true;
                 hasBoughtShrink = true;
                 displayShrinkMessage = true;
                 playerAnimator.SetTrigger("itemWasBought");
@@ -279,12 +281,52 @@ public class PurchaseActions : MonoBehaviour
 
             }
 
+            
 
+        }
+
+    }
+
+       public void ResetLevel()
+    {
+       if( hasBoughtShoot == true)
+        {
+            hasBoughtShoot = false;
+            actionsManager.hasShooting = false;
+            shooting = false;
+        }
+
+       if(hasBoughtShrink == true)
+        {
+            hasBoughtShrink = false;
+            actionsManager.hasShrinking = false;
+            shrinking = false;
+        }
+
+       if(hasBoughtDash == true)
+        {
+            hasBoughtDash = false;
+            actionsManager.hasClimbing = false ;
+            dashing = false;
+        }
+
+       if(hasBoughtJump == true)
+        {
+            hasBoughtJump = false;
+            actionsManager.hasJumping = false;
+            PlayerMovement.extraJumps = 0;
+
+            jumping = false;
+        }
+
+       if(hasBoughtClimb == true)
+        {
+            hasBoughtClimb =false;
+            actionsManager.hasClimbing = false;
+            climbing = false;
         }
     }
 
-       
-    
 }
 
 

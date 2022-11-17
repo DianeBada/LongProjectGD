@@ -5,61 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class Reset : MonoBehaviour
 {
-    public bool newSceneLoad = false;
+    public bool resetLevel;
+    public GameObject gManager;
 
-    ActionsManager actionsManager;
-    CamPreview camprev;
+    PurchaseActions purch;
     // Start is called before the first frame update
 
     void Awake()
     {
-        
-
-        
-}
-    void Start()
-    {
-        actionsManager = GetComponent<ActionsManager>();
-        camprev = GetComponent<CamPreview>();
-        newSceneLoad = true;
+        gManager.GetComponent<PurchaseActions>();
+       // purch = gameObject.GetComponent<PurchaseActions>();
 
     }
-    // Update is called once per frame
-    void Update()
+
+
+    public void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Is Colliding with player; reset level");
+            resetLevel = true;
+            gManager.GetComponent<PurchaseActions>().ResetLevel();
 
-
-        //{
-        //    actionsManager.hasClimbing = false;
-        //    actionsManager.hasJumping = false;
-        //    actionsManager.hasShrinking = false;
-        //    actionsManager.hasJumping = false;
-        //    actionsManager.hasDashing = false;
-
-        //    PurchaseActions.climbing = false;
-        //    PurchaseActions.shrinking = false;
-        //    PurchaseActions.jumping = false;
-        //    PurchaseActions.dashing = false;
-        //}
-
-        //camprev.isStart = false;
-
-
-
-        //if (CamPreview.isStart == true)
-        //{
-
-        //    actionsManager.hasClimbing = false;
-        //    actionsManager.hasJumping = false;
-        //    actionsManager.hasShrinking = false;
-        //    actionsManager.hasJumping = false;
-        //    actionsManager.hasDashing = false;
-
-        //    PurchaseActions.climbing = false;
-        //    PurchaseActions.shrinking = false;
-        //    PurchaseActions.jumping = false;
-        //    PurchaseActions.dashing = false;
-        //}
+        }
     }
 }
 

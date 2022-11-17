@@ -10,6 +10,9 @@ public class LevelChanger : MonoBehaviour
     Scene currentScene;
     ActionsManager actionsManager;
     Reset resetScene;
+    PurchaseActions purchScript;
+
+    public bool changeLevel = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +20,7 @@ public class LevelChanger : MonoBehaviour
         actionsManager = GetComponent<ActionsManager>();
         currentScene = SceneManager.GetActiveScene();
         resetScene = GetComponent<Reset>();
+        purchScript = GetComponent<PurchaseActions>();
 
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
@@ -28,7 +32,8 @@ public class LevelChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckPreview();
+        ResetAction();
     }
 
   
@@ -40,9 +45,8 @@ public class LevelChanger : MonoBehaviour
 
             if (sceneName == "Level_One")
             {
+             
                 SceneManager.LoadScene("Level_Two");
-                hasChanged = true;
-               
 
             }
             else if (sceneName == "Level_Two")
@@ -58,23 +62,36 @@ public class LevelChanger : MonoBehaviour
         }
     }
 
-   public void ResetAction()
+    public void ResetAction()
     {
-        if ( sceneName == "Level_Two" && resetScene.newSceneLoad == true)
+        if (sceneName == "Level_Two")
         {
-            {
-                actionsManager.hasClimbing = false;
-                actionsManager.hasJumping = false;
-                actionsManager.hasShrinking = false;
-                actionsManager.hasJumping = false;
-                actionsManager.hasDashing = false;
+           // changeLevel = true;
 
-                PurchaseActions.climbing = false;
-                PurchaseActions.shrinking = false;
-                PurchaseActions.jumping = false;
-                PurchaseActions.dashing = false;
-            }
+            //purchScript.GetComponent<PurchaseActions>().enabled = false;
+            //    actionsManager.hasClimbing = false;
+            //    actionsManager.hasJumping = false;
+            //    actionsManager.hasShrinking = false;
+            //    actionsManager.hasJumping = false;
+            //    actionsManager.hasDashing = false;
 
+            //    PurchaseActions.climbing = false;
+            //    PurchaseActions.shrinking = false;
+            //    PurchaseActions.jumping = false;
+            //    PurchaseActions.dashing = false;
+
+
+            //}
+
+            //purchScript.GetComponent<PurchaseActions>().enabled = true;
+
+        }
+    }
+
+    public void CheckPreview()
+    {
+        if(CamPreview.isDonePreview == true && currentScene.name == "Level_Two")
+        {
         }
     }
 }
