@@ -28,7 +28,7 @@ public class TutorialLevelScript : MonoBehaviour
     public GameObject player;
     public GameObject startPos;
 
-
+    ActionsManager actionsManager;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +42,7 @@ public class TutorialLevelScript : MonoBehaviour
         ApricotDashPanel.SetActive(false);
         SpikesPanel.SetActive(false);
 
-
+        actionsManager = GetComponent<ActionsManager>();
     }
 
     // Update is called once per frame
@@ -71,14 +71,14 @@ public class TutorialLevelScript : MonoBehaviour
         if (collision.gameObject.CompareTag("cherry-doubleJump"))
         {
             colCherry = true;
-            ActionsManager.hasJumping = true;
+            actionsManager.hasJumping = true;
             PurchaseActions.jumping = true;
             PlayerMovement.extraJumps = 1;
         }
         if (collision.gameObject.CompareTag("apricot-dash"))
         {
             colApricot = true;
-            ActionsManager.hasDashing = true;
+            actionsManager.hasDashing = true;
         }
 
          if (collision.gameObject.tag == "spikes")

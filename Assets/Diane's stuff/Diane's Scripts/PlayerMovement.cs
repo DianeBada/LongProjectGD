@@ -58,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool hasShrunk = false;
 
+    public ActionsManager actionsManager;
+
 
     void Start()
     {
@@ -75,7 +77,10 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+
+        actionsManager = GetComponent<ActionsManager>();
     }
+  
 
     private void Update()
     {
@@ -162,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 0;
             body.velocity = Vector2.zero;
         }
-        if (Input.GetKeyDown(KeyCode.E) && PurchaseActions.shrinking==true)
+        if (Input.GetKeyDown(KeyCode.E) && actionsManager.hasShrinking)
         {
             Debug.Log("is shrinking");
             if (hasShrunk == false)
@@ -181,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && ActionsManager.hasDashing == true)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash &&actionsManager.hasDashing == true)
         {
             Debug.Log("Dashing");
             StartCoroutine(Dash());

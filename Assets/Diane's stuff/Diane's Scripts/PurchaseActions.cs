@@ -62,7 +62,7 @@ public class PurchaseActions : MonoBehaviour
     public Animator playerAnimator;
     #endregion
 
-
+    ActionsManager actionsManager;
     void Awake()
     {
 
@@ -75,6 +75,7 @@ public class PurchaseActions : MonoBehaviour
         climbtext.text = "Climb - " + climbingCost.ToString();
         shrinktext.text = "Shrink - " + shrinkCost.ToString();
         shoottext.text = "Shoot - " + shootingCost.ToString();
+        actionsManager = GetComponent<ActionsManager>();
 
 
 
@@ -159,7 +160,7 @@ public class PurchaseActions : MonoBehaviour
             if (ActionsManager.moneyCount > walkingCost)
             {
                 ActionsManager.moneyCount -= walkingCost;
-                ActionsManager.hasWalking = true;
+                actionsManager.hasWalking = true;
                 walking = true;
                 ActionsManager.actionCounter++;
                 hasBoughtWalk = true;
@@ -182,7 +183,7 @@ public class PurchaseActions : MonoBehaviour
             if (ActionsManager.moneyCount > dashingCost)
             {
                 ActionsManager.moneyCount -= dashingCost;
-                ActionsManager.hasDashing = true;
+                actionsManager.hasDashing = true;
                 dashing = true;
                 ActionsManager.actionCounter++;
                 hasBoughtDash = true;
@@ -203,7 +204,7 @@ public class PurchaseActions : MonoBehaviour
             if (ActionsManager.moneyCount > jumpingCost)
             {
                 ActionsManager.moneyCount -= jumpingCost;
-                ActionsManager.hasJumping = true;
+                actionsManager.hasJumping = true;
                 jumping = true;
                 PlayerMovement.extraJumps = 1;
                 ActionsManager.actionCounter++;
@@ -224,10 +225,10 @@ public class PurchaseActions : MonoBehaviour
             if (ActionsManager.moneyCount > climbingCost)
             {
                 ActionsManager.moneyCount -= climbingCost;
-                ActionsManager.hasClimbing = true;
+                actionsManager.hasClimbing = true;
                 climbing = true;
                 ActionsManager.actionCounter++;
-                ActionsManager.hasClimbing = false;
+                actionsManager.hasClimbing = false;
                 hasBoughtClimb = true;
 
                 //Item Selection Animation
@@ -245,9 +246,9 @@ public class PurchaseActions : MonoBehaviour
             if (ActionsManager.moneyCount > shrinkCost)
             {
                 ActionsManager.moneyCount -= shrinkCost;
-                ActionsManager.hasShrinking = true;
+                actionsManager.hasShrinking = true;
                 shrinking = true;
-                ActionsManager.hasShrinking = false;
+                actionsManager.hasShrinking = false;
                 hasBoughtShrink = true;
                 displayShrinkMessage = true;
                 playerAnimator.SetTrigger("itemWasBought");
@@ -265,7 +266,7 @@ public class PurchaseActions : MonoBehaviour
             if (ActionsManager.moneyCount > shootingCost)
             {
                 ActionsManager.moneyCount -= shootingCost;
-                ActionsManager.hasShooting = true;
+                actionsManager.hasShooting = true;
                 shooting = true;
                 ActionsManager.actionCounter++;
                 hasBoughtShoot = true;

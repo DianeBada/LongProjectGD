@@ -5,7 +5,7 @@ using UnityEngine;
 public class CamPreview : MonoBehaviour
 {
     public static bool isDonePreview = false;
-    public static bool isStart = false;
+    public bool isStart = false;
 
 
     [SerializeField]
@@ -26,6 +26,7 @@ public class CamPreview : MonoBehaviour
         }
         else if (PlayerMovement.deathTimes>=1)
         {
+            isStart = false;
             mainCam.SetActive(true);
             previewCam.SetActive(false);
         }

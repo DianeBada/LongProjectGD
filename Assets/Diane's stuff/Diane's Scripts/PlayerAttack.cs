@@ -11,15 +11,17 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMovement playerMovement;
     private float cooldownTimer = Mathf.Infinity;
 
+    ActionsManager actionsManager;
     private void Awake()
     {
         //anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+        actionsManager = GetComponent<ActionsManager>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && cooldownTimer > attackCooldown && playerMovement.canAttack() && ActionsManager.hasShooting == true && PurchaseActions.shooting == true)
+        if (Input.GetKeyDown(KeyCode.F) && cooldownTimer > attackCooldown && playerMovement.canAttack() && actionsManager.hasShooting == true && PurchaseActions.shooting == true)
             Attack();
 
         cooldownTimer += Time.deltaTime;

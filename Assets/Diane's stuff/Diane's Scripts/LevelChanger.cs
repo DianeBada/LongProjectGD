@@ -7,12 +7,16 @@ public class LevelChanger : MonoBehaviour
 {
     private string sceneName;
     public bool hasChanged;
+    Scene currentScene;
+    ActionsManager actionsManager;
+    Reset resetScene;
 
     // Start is called before the first frame update
     void Start()
     {
-
-        Scene currentScene = SceneManager.GetActiveScene();
+        actionsManager = GetComponent<ActionsManager>();
+        currentScene = SceneManager.GetActiveScene();
+        resetScene = GetComponent<Reset>();
 
         // Retrieve the name of this scene.
         sceneName = currentScene.name;
@@ -54,26 +58,22 @@ public class LevelChanger : MonoBehaviour
         }
     }
 
-    public void Reset()
+   public void ResetAction()
     {
-        if(CamPreview.isDonePreview)
+        if ( sceneName == "Level_Two" && resetScene.newSceneLoad == true)
         {
-            if (hasChanged == true)
             {
-                ActionsManager.hasClimbing = false;
-                ActionsManager.hasJumping = false;
-                ActionsManager.hasShrinking = false;
-                ActionsManager.hasJumping = false;
-                ActionsManager.hasDashing = false;
+                actionsManager.hasClimbing = false;
+                actionsManager.hasJumping = false;
+                actionsManager.hasShrinking = false;
+                actionsManager.hasJumping = false;
+                actionsManager.hasDashing = false;
 
                 PurchaseActions.climbing = false;
                 PurchaseActions.shrinking = false;
                 PurchaseActions.jumping = false;
                 PurchaseActions.dashing = false;
             }
-
-            hasChanged = false;
-
 
         }
     }
