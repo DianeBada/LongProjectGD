@@ -39,7 +39,9 @@ public class PlatformOne : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //Set the parent of that object to the platform
-            collision.transform.parent = GameObject.Find("Floating Platform (1)").transform;
+            collision.collider.transform.SetParent(transform);
+
+            print("It is colliding");
         }
     }
 
@@ -49,7 +51,9 @@ public class PlatformOne : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //no longer a child of the object
-            collision.transform.parent = null;
+            collision.collider.transform.SetParent(null);
+
+            print("no longer colliding");
         }
     }
 }

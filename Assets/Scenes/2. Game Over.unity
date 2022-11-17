@@ -61458,3 +61458,4 @@ MonoBehaviour:
   GameOverSound: {fileID: 612971478}
   MenuClick_TryAgain: {fileID: 732559120}
   MenuClick_MainMenu: {fileID: 1486794128}
+  LevelNumber: 0

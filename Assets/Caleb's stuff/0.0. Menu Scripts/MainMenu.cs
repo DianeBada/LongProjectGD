@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
         //Audio
         startAudio.Play();
 
-        //Change to main menu scene
+        //Change to Tutorial scene
         SceneManager.LoadScene("Level_Tutorial");
     }
 
@@ -28,5 +28,11 @@ public class MainMenu : MonoBehaviour
 
         //Message
         Debug.Log("Player quit the game");
+    }
+
+    public void Credits()
+    {
+        //Audio
+        startAudio.Play();
     }
 }
