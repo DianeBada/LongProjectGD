@@ -16,7 +16,7 @@ public class EnemyProjectile : EnemyDamage
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+       // anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
     }
 
@@ -46,17 +46,13 @@ public class EnemyProjectile : EnemyDamage
         coll.enabled = false;
 
         if (anim != null)
-        
-            //Do nothing
-           anim.SetTrigger("explode"); //When the object is a fireball explode it
-
-        
-        else 
+            anim.SetTrigger("explode"); //When the object is a fireball explode it
+        else
             gameObject.SetActive(false); //When this hits any object deactivate arrow
-
-        
-
     }
+
+
+
 
     
     private void Deactivate()
