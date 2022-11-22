@@ -40,9 +40,9 @@ TagManager:
   - wall
   - Player
   - Enemy
-  - 
-  - 
-  - 
+  - collectibles
+  - projectiles
+  - enemy projectiles
   - 
   - 
   - 

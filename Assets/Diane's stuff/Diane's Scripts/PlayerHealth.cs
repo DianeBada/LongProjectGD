@@ -27,6 +27,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Behaviour[] components;
     private bool invulnerable;
 
+    public int flickerAmount = 3;
+    public float flickerDuration = 0.5f;
+    public bool canTakeDamage = false;
 
     // Start is called before the first frame update
     public void Start()
@@ -39,8 +42,12 @@ public class PlayerHealth : MonoBehaviour
         SetMaxHealthValue();
     }
 
+
+
     void Update()
     {
+        TakingDamage();
+        
         if (StoreDeHellContent.isOpen == true)
         {
             slider.gameObject.SetActive(false);
@@ -75,6 +82,7 @@ public class PlayerHealth : MonoBehaviour
             SceneManager.LoadScene("Game Over");
         }
 
+       
 
     }
     public void DeductHealth(float deductHealth)
@@ -99,19 +107,28 @@ public class PlayerHealth : MonoBehaviour
 
         }
 
-        else if (collision.gameObject.tag == "spikes")
+         if (collision.gameObject.tag == "spikes")
         {
             //StartCoroutine(Invunerability());
             DeductHealth(100);
             playerLives -= 1;
-
-
 
         }
 
         if (collision.gameObject.tag == "hearts")
         {
             playerLives = +1;
+        }
+
+       
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "enemy projectiles")
+        {
+            Debug.Log("damage ffect for player is playing");
+            canTakeDamage = true;
         }
     }
 
@@ -148,6 +165,31 @@ public class PlayerHealth : MonoBehaviour
 
         }
 
+       
+
+
+    }
+
+    void TakingDamage()
+    {
+        if (canTakeDamage == true)
+        {
+            Debug.Log("Courotine starts for damage effect");
+            StartCoroutine(DamageFlicker());
+        }
+    }
+
+    IEnumerator DamageFlicker()
+    {
+
+        for (int i = 0; i < flickerAmount; i++)
+        {
+            spriteRend.color = new Color(0.85f, 0.157f, 0.157f, 0.5f);
+            yield return new WaitForSeconds(flickerDuration);
+        }
+        spriteRend.color = Color.white;
+        yield return new WaitForSeconds(flickerDuration);
+        canTakeDamage = false;
 
     }
 

@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         actionsManager = GetComponent<ActionsManager>();
         levelChanger = GetComponent<LevelChanger>();
         resetScene = GetComponent<Reset>();
-        purchase = GetComponent<PurchaseActions>();
+        purchase =  GameObject.FindObjectOfType<PurchaseActions>();
     }
   
 
@@ -322,6 +322,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool canAttack()
     {
+        //purchase.hasBoughtShoot = true;
         return horizontalInput == 0 && isGrounded() && !onWall();
     }
 

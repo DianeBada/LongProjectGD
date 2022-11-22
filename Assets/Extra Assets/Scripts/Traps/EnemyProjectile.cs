@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyProjectile : EnemyDamage
@@ -7,6 +8,8 @@ public class EnemyProjectile : EnemyDamage
     private Animator anim;
     private BoxCollider2D coll;
     [SerializeField] private float resetTime;
+
+
 
 
     private bool hit;
@@ -26,6 +29,7 @@ public class EnemyProjectile : EnemyDamage
     }
     private void Update()
     {
+
         if (hit) return;
         float movementSpeed = speed * Time.deltaTime;
         transform.Translate(movementSpeed, 0, 0);
@@ -51,9 +55,14 @@ public class EnemyProjectile : EnemyDamage
             gameObject.SetActive(false); //When this hits any object deactivate arrow
 
         
+
     }
+
+    
     private void Deactivate()
     {
         gameObject.SetActive(false);
     }
+
+   
 }

@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
     private void Update()
@@ -22,18 +22,21 @@ public class Projectile : MonoBehaviour
         transform.Translate(movementSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
-        if (lifetime > 2f) gameObject.SetActive(false);
+        if (lifetime > 5) gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
         boxCollider.enabled = false;
-       // anim.SetTrigger("explode");
+       anim.SetTrigger("explode");
 
         if (collision.tag == "Enemy")
-            // collision.GetComponent<Health>()?.TakeDamage(1);
-            Debug.Log("hitEnemy");
+            collision.GetComponent<Health>()?.TakeDamage(1);
+        //Health.canTakeDamage = true;
+
+
+        Debug.Log("hitEnemy");
     }
     public void SetDirection(float _direction)
     {

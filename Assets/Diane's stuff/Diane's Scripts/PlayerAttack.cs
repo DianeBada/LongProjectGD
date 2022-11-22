@@ -10,40 +10,93 @@ public class PlayerAttack : MonoBehaviour
     private Animator anim;
     private PlayerMovement playerMovement;
     private float cooldownTimer = Mathf.Infinity;
+    public float numberofShots;
+
+    public bool ableToShoot;
 
     ActionsManager actionsManager;
     PurchaseActions purchase;
-    private void Awake()
+   public void Awake()
+
+       
     {
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         actionsManager = GetComponent<ActionsManager>();
+        purchase = FindObjectOfType<PurchaseActions>();
+        ableToShoot = Input.GetKeyDown(KeyCode.F) && cooldownTimer > attackCooldown && playerMovement.canAttack() && purchase.hasBoughtShoot;
     }
 
-    private void Update()
+     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && cooldownTimer > attackCooldown && playerMovement.canAttack() && purchase.hasBoughtShoot && purchase.shooting == true)
+
+
+        if (ableToShoot == true)
+
+        {
             Attack();
 
+        }
+        Debug.Log("is shooting");
         cooldownTimer += Time.deltaTime;
+        Debug.Log(numberofShots);
+
+        if(ableToShoot != true)
+        {
+            Debug.Log("cant shoot my dear");
+        }
+
+
+      
+
+       
+
+
+        if (numberofShots >=10)
+        {
+            firePoint.gameObject.SetActive(false);
+
+        }
+
+
+
+
     }
 
-    private void Attack()
+    public void Attack()
     {
        // SoundManager.instance.PlaySound(fireballSound);
-       // anim.SetTrigger("attack");
+        anim.SetTrigger("isShooting");
+        numberofShots += 1;
+
         cooldownTimer = 0;
 
-        fireballs[FindFireball()].transform.position = firePoint.position;
-        fireballs[FindFireball()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+        if(firePoint.gameObject.activeInHierarchy)
+        {
+            fireballs[FindFireball()].transform.position = firePoint.position;
+            fireballs[FindFireball()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+        }
+
+        else
+        {
+            Debug.Log("out of ammo");
+        }
+
+        //numberofShots
     }
     private int FindFireball()
     {
         for (int i = 0; i < fireballs.Length; i++)
         {
-            if (!fireballs[i].activeInHierarchy)
+            if (!fireballs[i].activeInHierarchy )
                 return i;
+
         }
+
         return 0;
+
     }
+
+   
+
 }
