@@ -14,6 +14,7 @@ public class TutorialLevelScript : MonoBehaviour
     public GameObject ApricotDashPanel;
     public GameObject SpikesPanel;
     public GameObject coinsPanel;
+    public GameObject mapPanel;
 
 
     public bool spikesTrigger = false;
@@ -25,6 +26,7 @@ public class TutorialLevelScript : MonoBehaviour
     public bool enterTrigger = false;
     public bool hitSpikes = false;
     public bool hasCoins = false;
+    public bool hasMaptut = false;
     public GameObject player;
     public GameObject startPos;
 
@@ -43,9 +45,10 @@ public class TutorialLevelScript : MonoBehaviour
         BananaClimbPanel.SetActive(false);
         ApricotDashPanel.SetActive(false);
         SpikesPanel.SetActive(false);
+        mapPanel.SetActive(false);
 
-        actionsManager = GetComponent<ActionsManager>();
-        purch = GetComponent<PurchaseActions>();
+        actionsManager = FindObjectOfType<ActionsManager>();
+        purch = GameObject.FindObjectOfType<PurchaseActions>();
         playerMove = GetComponent<PlayerMovement>();
     }
 
@@ -69,20 +72,20 @@ public class TutorialLevelScript : MonoBehaviour
         {
             collBanana = true;
 
-            purch.climbing = true;
+            purch.hasBoughtClimb= true;
         }
 
         if (collision.gameObject.CompareTag("cherry-doubleJump"))
         {
             colCherry = true;
-            actionsManager.hasJumping = true;
+            purch.hasBoughtJump = true;
             purch.jumping = true;
             playerMove.extraJumps = 1;
         }
         if (collision.gameObject.CompareTag("apricot-dash"))
         {
             colApricot = true;
-            actionsManager.hasDashing = true;
+            purch.hasBoughtDash = true;
         }
 
          if (collision.gameObject.tag == "spikes")
@@ -94,6 +97,13 @@ public class TutorialLevelScript : MonoBehaviour
         {
             hasCoins = true;
         }
+
+        if (collision.gameObject.CompareTag("map-tut"))
+        {
+            hasMaptut = true;
+        }
+
+
 
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -117,6 +127,8 @@ public class TutorialLevelScript : MonoBehaviour
         {
             enterTrigger = true;
         }
+
+      
     }
 
 
@@ -210,7 +222,16 @@ public class TutorialLevelScript : MonoBehaviour
             coinsPanel.gameObject.SetActive(false);
             hasCoins = false;
         }
+        if(hasMaptut == true)
+        {
+            mapPanel.gameObject.SetActive(true);
+            yield return new WaitForSeconds(4f);
+            mapPanel.gameObject.SetActive(false);
+            hasMaptut = false;
+            yield return new WaitForSeconds(1f);
+            SceneManager.LoadScene("Level_One");
 
+        }
 
     }
 

@@ -55,7 +55,14 @@ public class LevelChanger : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
 
-            if (sceneName == "Level_One")
+            if (sceneName == "Tutorial_Level")
+            {
+
+                SceneManager.LoadScene("Level_One");
+
+            }
+
+           else if (sceneName == "Level_One")
             {
 
                 SceneManager.LoadScene("Level_Two");

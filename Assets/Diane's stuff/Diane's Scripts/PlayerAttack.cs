@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
     {
 
 
-        if (ableToShoot == true)
+        if (Input.GetKeyDown(KeyCode.F) && cooldownTimer > attackCooldown && playerMovement.canAttack() && purchase.hasBoughtShoot)
 
         {
             Attack();
@@ -41,11 +41,7 @@ public class PlayerAttack : MonoBehaviour
         cooldownTimer += Time.deltaTime;
         Debug.Log(numberofShots);
 
-        if(ableToShoot != true)
-        {
-            Debug.Log("cant shoot my dear");
-        }
-
+      
 
       
 
