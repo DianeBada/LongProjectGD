@@ -244,6 +244,7 @@ public class PurchaseActions : MonoBehaviour
 
                 //Item Selection Animation
                 playerAnimator.SetTrigger("itemWasBought");
+                hasBoughtClimb = true;
 
 
             }

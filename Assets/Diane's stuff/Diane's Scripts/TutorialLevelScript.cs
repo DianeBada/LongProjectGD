@@ -48,7 +48,7 @@ public class TutorialLevelScript : MonoBehaviour
         mapPanel.SetActive(false);
 
         actionsManager = FindObjectOfType<ActionsManager>();
-        purch = GameObject.FindObjectOfType<PurchaseActions>();
+        purch =FindObjectOfType<PurchaseActions>();
         playerMove = GetComponent<PlayerMovement>();
     }
 
@@ -72,7 +72,8 @@ public class TutorialLevelScript : MonoBehaviour
         {
             collBanana = true;
 
-            purch.hasBoughtClimb= true;
+            purch.hasBoughtClimb = true;
+            purch.climbing = true;
         }
 
         if (collision.gameObject.CompareTag("cherry-doubleJump"))
@@ -128,6 +129,10 @@ public class TutorialLevelScript : MonoBehaviour
             enterTrigger = true;
         }
 
+        if(other.gameObject.CompareTag("portal-ring"))
+        {
+            SceneManager.LoadScene("Level_One");
+        }
       
     }
 
@@ -228,8 +233,8 @@ public class TutorialLevelScript : MonoBehaviour
             yield return new WaitForSeconds(4f);
             mapPanel.gameObject.SetActive(false);
             hasMaptut = false;
-            yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("Level_One");
+            //yield return new WaitForSeconds(1f);
+            //SceneManager.LoadScene("Level_One");
 
         }
 

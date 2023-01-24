@@ -38,10 +38,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dashing")]
 
     private bool canDash = true;
-    private bool isDashing;
-    private float dashingPower = 60f;
-    private float dashingTime = 0.2f;
+    public float dashingPower =190f;
+    private float dashingTime = 0.6f;
     private float dashingCooldown = 1f;
+
+
+    public float dashDistance = 15f;
+    private bool isDashing;
+    float doubleTapTime;
+    KeyCode lastKeyCode;
 
     [SerializeField] 
     private TrailRenderer trail;
@@ -81,25 +86,31 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
 
-        actionsManager = GetComponent<ActionsManager>();
+        actionsManager = GameObject.Find("Game Manager").GetComponent<ActionsManager>();
         levelChanger = GetComponent<LevelChanger>();
         resetScene = GetComponent<Reset>();
-        purchase =  GameObject.FindObjectOfType<PurchaseActions>();
+        purchase =  GameObject.Find("Game Manager").GetComponent<PurchaseActions>();
     }
-  
 
-   public void Update()
+
+    private void FixedUpdate()
     {
-        
-        if(isDashing == true)
+    }
+       
+    public void Update()
+    {
+        if (isDashing)
         {
+
             return;
         }
         horizontalInput = Input.GetAxis("Horizontal");
 
+
+
         #region CAleb's stuff (movement ANIMATIONS):
 
-        if(horizontalInput == 0) //If the player isn't moving
+        if (horizontalInput == 0) //If the player isn't moving
         {
             anim.SetBool("isRunning", false);
 
@@ -192,11 +203,41 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, body.velocity.y / 2);
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && purchase.hasBoughtDash)
-        {
-            Debug.Log("Dashing");
-            StartCoroutine(Dash());
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && purchase.hasBoughtDash == true)
+        //{
+        //    Debug.Log("Dashing");
+        //    StartCoroutine(Dash());
+        //}
+
+
+
+        // Dash Left
+        //if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && purchase.hasBoughtDash == true)
+        //{
+        //    Debug.Log("Dashingt");
+        //    //  StartCoroutine(Dash());
+        //    //if(doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
+        //    StartCoroutine(Dash());
+        
+      
+
+        ////if (Input.GetKeyDown(KeyCode.D) && purchase.hasBoughtDash == true)
+        ////{
+        ////    Debug.Log("Dashing");
+        ////    //  StartCoroutine(Dash());
+        ////    if (doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
+        ////    {
+        ////        StartCoroutine(Dash());
+
+        ////    }
+        ////    else
+        ////    {
+        ////        // have half a sec to tap again
+        ////        doubleTapTime = Time.time + 0.5f;
+        ////    }
+
+        ////    lastKeyCode = KeyCode.D;
+        //}
         else
         {
             Debug.Log("canot dash");
@@ -210,9 +251,25 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             body.gravityScale = 7;
-            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+           
+                body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-            if (isGrounded() || isOnThePlatform)
+             if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && purchase.hasBoughtDash == true)
+        {
+                    Debug.Log("Dashingt");
+                    //  StartCoroutine(Dash());
+                    //if(doubleTapTime > Time.time && lastKeyCode == KeyCode.A)
+                    StartCoroutine(Dash());
+
+
+                }
+
+             else
+            
+                Debug.Log(" can't dash");
+            
+
+                if (isGrounded() || isOnThePlatform)
             {
                 coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
                 jumpCounter = extraJumps; //Reset jump counter to extra jump value
@@ -246,7 +303,6 @@ public class PlayerMovement : MonoBehaviour
     if (hit) this.platform = hit.collider.gameObject.transform;
     else this.platform = null;
     return hit.collider != null;
-
   
     }
     private void Jump()
@@ -257,10 +313,9 @@ public class PlayerMovement : MonoBehaviour
 
        // SoundManager.instance.PlaySound(jumpSound);
 
-        if (onWall() && purchase.climbing == true)
-        {
-            
-            
+        if (onWall() && purchase.hasBoughtClimb == true)        {
+
+            Debug.Log("On wall and hasBought clim is true");
                 WallJump();
             
             
@@ -296,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void WallJump()
+    public void WallJump()
     {
         
           body.AddForce(new Vector2(-Mathf.Sign(transform.localScale.x) * wallJumpX, wallJumpY));
@@ -329,18 +384,30 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        canDash = false;
+
+        //isDashing = true;
+        //body.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        //body.AddForce(new Vector2(dashDistance * dashingPower, 0f), ForceMode2D.Impulse);
+        //float gravity = body.gravityScale;
+        //body.gravityScale = 0;
+        //yield return new WaitForSeconds(0.4f);
+        //isDashing = false;
+        //body.gravityScale = gravity;
+
+
+       // canDash = false;
+
         isDashing = true;
         float originalGravity = body.gravityScale;
         body.gravityScale = 0f;
         body.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        Debug.Log(body.velocity);
         trail.emitting = true;
 
         //Dashing animation
         anim.SetTrigger("isDashing");
         //
-
-        yield return new WaitForSeconds(dashingTime);
+        yield return new WaitForSeconds(.4f);
         trail.emitting = false;
         body.gravityScale = originalGravity;
         isDashing = false;
@@ -348,7 +415,10 @@ public class PlayerMovement : MonoBehaviour
         canDash = true;
 
 
-        
+
+
+
+
 
 
     }

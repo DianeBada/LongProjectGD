@@ -29,22 +29,15 @@ public class PlayerAttack : MonoBehaviour
 
      void Update()
     {
-
-
         if (Input.GetKeyDown(KeyCode.F) && cooldownTimer > attackCooldown && playerMovement.canAttack() && purchase.hasBoughtShoot)
-
-        {
             Attack();
 
-        }
-        Debug.Log("is shooting");
         cooldownTimer += Time.deltaTime;
-        Debug.Log(numberofShots);
+    
 
       
 
-      
-
+ 
        
 
 
